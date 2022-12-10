@@ -21,8 +21,7 @@ defmodule DarkKernel.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:stream_data, "~> 0.5"},
-      {:shorter_maps, "~> 2.1"}
+      {:stream_data, "~> 0.5"}
     ]
   end
 end
