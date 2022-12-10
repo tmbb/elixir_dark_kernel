@@ -1,0 +1,4 @@
+%{
+  "shorter_maps": {:hex, :shorter_maps, "2.2.5", "77b2e3632a49c72ca8aea2a47687767b3ad2623b9ade529ffe31f41865a32886", [:mix], [], "hexpm", "fbef59a9f13369f819111f500f0253678526ea8c717d794a224df41223bc88ab"},
+  "stream_data": {:hex, :stream_data, "0.5.0", "b27641e58941685c75b353577dc602c9d2c12292dd84babf506c2033cd97893e", [:mix], [], "hexpm", "012bd2eec069ada4db3411f9115ccafa38540a3c78c4c0349f151fc761b9e271"},
+}
