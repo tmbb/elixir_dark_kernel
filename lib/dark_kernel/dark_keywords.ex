@@ -4,216 +4,308 @@ defmodule DarkKernel.DarkKeywords do
 
   @debug_generated_code false
 
-  @bang_keyword_re ~r/![a-z][A-Za-z0-9_]*[!?]?$/
-  @keyword_without_default_re ~r/^[a-z][A-Za-z0-9_]*[!?]?$/
-  @keyword_with_default_re ~r/^(?<key>[a-z][A-Za-z0-9_]*[!?]?):\s+(?<default>.+)$/
-
   defmodule InvalidKeywordError do
-    defexception [:message]
-
-    @impl true
-    def exception(invalid_word) do
-      msg = """
-      Invalid keyword: #{invalid_word}
-      Keywords must be valid Elixir variable names and contain only ASCII characters.
-      They can be preceded by a bang (e.g. `!key`) or contain a default value (e.g. `key: default`).
-      """
-
-      %__MODULE__{message: msg}
-    end
-  end
-
-  defmodule InvalidKeywordMatchExpressionError do
     defexception [:message]
 
     @impl true
     def exception(text) do
       msg = """
-      Invalid dark keyword match expression: ~k[#{text}].
-      Match expressions can't contain more than one equals (=) sign.
+      Invalid ~k[...] expression: ~k[#{text}]
+      Keywords must be valid Elixir variable names, and the list can't be empty.
+      They can be preceded by a bang (e.g. `!key`) or contain a value (e.g. `key: value`).
+      Mixing bangs with keys (e.g. `!key: value`) is not allowed.
       """
 
       %__MODULE__{message: msg}
     end
   end
 
-  defmacro sigil_k(contents, modifiers) do
-    do_sigil_k(contents, modifiers)
-  end
-
-  def do_sigil_k(text_ast, _modifiers) do
+  def do_sigil_K(text_ast, modifiers, env) do
     {:<<>>, _meta, [text]} = text_ast
-    # Decide whether it's a matching expression or not.
-    # If the text contains the ?= character, it's a matching expression
-    if String.contains?(text, "=") do
-      # Expand as normal keyword
-      do_match_keywords(text)
-    else
-      # Expand as matching expression
-      do_normal_keywords(text)
-    end
-  end
+    # Wrap the text in brackets (e.g. [...]) and try to parse it as a list
+    # with all the syntactic sugar that elixir lists support
+    quoted = Code.string_to_quoted!("[#{text}]")
 
-  # ------------------------------------------------------
-  # Normal keywords
-  # ------------------------------------------------------
-
-  def do_normal_keywords(text) do
-    words = parse_keywords(text)
-    build_keyword_list(words)
-  end
-
-  defp parse_keywords(text) do
-    words =
-      text
-      |> String.split(",")
-      |> Enum.map(&String.trim/1)
-
-    for word <- words do
-      unless word =~ @keyword_without_default_re do
-        raise InvalidKeywordError, word
-      end
+    unless modifiers == [] do
+      raise "~k[] doesn't support modifiers"
     end
 
-    words
-  end
+    unless is_list(quoted) do
+      raise InvalidKeywordError, text
+    end
 
-  # ------------------------------------------------------
-  # Keyword matches
-  # ------------------------------------------------------
+    unless length(quoted) > 0 do
+      raise InvalidKeywordError, text
+    end
 
-  defp parse_keyword_match(text) do
-    {left, right} =
-      case String.split(text, "=") do
-        [left, right] ->
-          {left, right}
+    last = List.last(quoted)
+
+    {assignment?, normalized_list, assigned_to} =
+      case last do
+        # ~k[a, b, c = opts]
+        {:=, _meta, [left, right]} ->
+          list = List.delete_at(quoted, -1) ++ [left]
+          {true, normalize_list(list), {:ok, right}}
+
+        # ~k[a, b, c: default = opts]
+        {key, {:=, _meta, [left, right]}} when is_atom(key) ->
+          list = List.delete_at(quoted, -1) ++ [{key, left}]
+          {true, normalize_list(list), {:ok, right}}
 
         _other ->
-          raise InvalidKeywordMatchExpressionError, text
+          {false, normalize_list(quoted), :error}
       end
 
-    left = String.trim(left)
-    right = String.trim(right)
+    case {assignment?, assigned_to} do
+      {false, :error} ->
+        do_no_assignment(text, normalized_list, env)
 
-    words =
-      left
-      |> String.split(",")
-      |> Enum.map(&String.trim/1)
-
-    for word <- words do
-      # NOTE: in a matching ~k[] expression, words
-      # can start with a `!` character
-      bang_keyword? = (word =~ @bang_keyword_re)
-      keyword_with_default? = (word =~ @keyword_with_default_re)
-      keyword_without_default? = (word =~ @keyword_without_default_re)
-
-      valid_keyword? =
-          bang_keyword? or
-          keyword_with_default? or
-          keyword_without_default?
-
-      unless valid_keyword? do
-        raise InvalidKeywordError, word
-      end
+      {true, {:ok, value}} ->
+        do_assignment(text, normalized_list, value, env)
     end
-
-    words =
-      for word <- words do
-        case word do
-          "!" <> rest -> {:fetch, {rest, "nil"}}
-          other ->
-            case Regex.named_captures(@keyword_with_default_re, word) do
-              nil ->
-                {:get, {other, "nil"}}
-
-              %{"key" => key, "default" => default} ->
-                {:get, {key, default}}
-            end
-        end
-      end
-
-    {right, words}
   end
 
-  defp build_keyword_match(matched, words) do
-    matched_expression = Macro.var(String.to_atom(matched), nil)
-    matched_constant = Macro.unique_var(:matched_constant, __MODULE__)
+  def do_no_assignment(_text, normalized_list, _env) do
+    for element <- normalized_list do
+      case element do
+        {:bang, _key} ->
+          raise "Can't have bangs (!) unless it's an assignment expression"
 
-    keywords = for {_tag, {word, _default}} <- words, do: word
+        {:with_value, key, value_ast} ->
+          {key, value_ast}
+
+        {:without_value, key} ->
+          unhygienic_variable = Macro.var(key, nil)
+          {key, unhygienic_variable}
+      end
+    end
+  end
+
+  def do_assignment(tilde_k_text, normalized_list, assigned_to, env) do
+    # Here we want maximum hygiene; that's why we generate a unique var
+    constant = Macro.unique_var(:constant_kw_list, __MODULE__)
+
+    initialize_constant =
+      quote do
+        unquote(constant) = unquote(assigned_to)
+      end
 
     assignments =
-      for {tag, {word, default}} <- words do
-        default_ast = Code.string_to_quoted!(default)
-        atom_key = String.to_atom(word)
-        variable = Macro.var(atom_key, nil)
+      for element <- normalized_list do
+        case element do
+          {:bang, key} ->
+            # No hygiene! we want to capture the user variable
+            unhygienic_variable = Macro.var(key, nil)
 
-        case tag do
-          :get ->
+            # Raise an error if the key doesn't exist
             quote do
-              unquote(variable) =
-                Keyword.get(
-                  unquote(matched_constant),
-                  unquote(atom_key),
-                  unquote(default_ast)
+              unquote(unhygienic_variable) =
+                Keyword.fetch!(
+                  unquote(constant),
+                  unquote(key)
                 )
             end
 
-          :fetch ->
+          {:with_value, key, value_ast} ->
+            # No hygiene! we want to capture the user variable
+            unhygienic_variable = Macro.var(key, nil)
+
+            # Use the provided value if the key doesn't exist
             quote do
-              unquote(variable) =
-                Keyword.fetch!(
-                  unquote(matched_constant),
-                  unquote(atom_key)
+              unquote(unhygienic_variable) =
+                Keyword.get(
+                  unquote(constant),
+                  unquote(key),
+                  unquote(value_ast)
+                )
+            end
+
+          {:without_value, key} ->
+            # No hygiene! we want to capture the user variable
+            unhygienic_variable = Macro.var(key, nil)
+
+            # Default to nil if the key doesn't exist
+            quote do
+              unquote(unhygienic_variable) =
+                Keyword.get(
+                  unquote(constant),
+                  unquote(key),
+                  nil
                 )
             end
         end
       end
 
-    return_value = build_keyword_list(keywords)
+    return_value =
+      for element <- normalized_list do
+        case element do
+          {:bang, key} ->
+            unhygienic_variable = Macro.var(key, nil)
+            {key, unhygienic_variable}
+
+          {:with_value, key, _value_ast} ->
+            unhygienic_variable = Macro.var(key, nil)
+            {key, unhygienic_variable}
+
+          {:without_value, key} ->
+            unhygienic_variable = Macro.var(key, nil)
+            {key, unhygienic_variable}
+        end
+      end
 
     ast =
       quote do
         (
-          unquote(matched_constant) = unquote(matched_expression);
-          unquote_splicing(assignments);
-          _ = unquote(return_value)
+          unquote(initialize_constant)
+          unquote_splicing(assignments)
+          # We want warnings about unused variables
+          unquote(return_value)
         )
       end
 
-    maybe_debug_ast(ast)
+    maybe_debug_ast(tilde_k_text, ast, env)
 
     ast
   end
 
-  # ------------------------------------------------------
-  # Utilities
-  # ------------------------------------------------------
+  def normalize_list(quoted) do
+    for element <- quoted do
+      case element do
+        # Variable: [a, ...]
+        {key, _meta, atom} = _var when is_atom(key) and is_atom(atom) ->
+          {:without_value, key}
 
-  def do_match_keywords(text) do
-    {matched, words} = parse_keyword_match(text)
-    build_keyword_match(matched, words)
-  end
+        # Variable with a bang: [!a, ...]
+        {:!, _meta1, [{key, _meta2, atom}]} when is_atom(key) and is_atom(atom) ->
+          {:bang, key}
 
-  defp build_keyword_list(words) do
-    for word <- words do
-      atom_key = String.to_atom(word)
-      variable = Macro.var(atom_key, nil)
-      {atom_key, variable}
+        # Variable with a value: [a: value, ...]
+        {key, value} when is_atom(key) ->
+          {:with_value, key, value}
+      end
     end
   end
 
-  defp maybe_debug_ast(ast) do
+  # ────────────────────────────────────────────────
+  # Debugging
+  # ────────────────────────────────────────────────
+
+  defp maybe_debug_ast(tilde_k_text, ast, env) do
     if @debug_generated_code do
       generated_code =
-      ast
+        ast
         |> Macro.to_string()
         |> Code.format_string!()
+        |> to_string()
+
+      table = three_sided_cells([
+        "~k[#{tilde_k_text}]",
+        generated_code,
+        inspect(ast, pretty: true)
+      ])
+
+      relative_filename = Path.relative_to_cwd(env.file)
+      location = "#{relative_filename}:#{env.line}"
+
+      function =
+        case env.function do
+          nil ->
+            ""
+
+          {fun, arity} ->
+            "  ⤷ function: #{inspect(env.module)}.#{fun}/#{arity}\n"
+        end
 
       Logger.debug([
-        "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n",
-        generated_code,
-        "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        location,
+        "\n\n",
+        function,
+        table
       ])
     end
+  end
+
+  # ────────────────────────────────────────────────
+  # Table formatting
+  # ────────────────────────────────────────────────
+
+  @default_table_width 100
+
+  defp three_sided_cell(content, options) do
+    padding = Keyword.get(options, :padding, 1)
+    width = Keyword.get(options, :width, @default_table_width)
+    bottom? = Keyword.get(options, :bottom?, false)
+    top? = Keyword.get(options, :top?, false)
+
+    v_padding = List.duplicate(" │\n", padding - 1)
+    h_padding = List.duplicate(" ", padding)
+
+    nw_corner =
+      case top? do
+        true -> " ┌"
+        false -> " ├"
+      end
+
+    sw_corner =
+      case bottom? do
+        true -> " └"
+        false -> " ├"
+      end
+
+
+    as_table_cell_content =
+      content
+      |> String.split("\n")
+      |> Enum.map(fn line -> [" │", h_padding, line, "\n"] end)
+
+    [
+      (if top?, do: [nw_corner, hline(width), "\n"], else: []),
+      v_padding,
+      as_table_cell_content,
+      v_padding,
+      [sw_corner, hline(width), "\n"],
+    ]
+  end
+
+  def three_sided_cells(cells_content, options \\ []) do
+    maximum_width =
+      cells_content
+      |> Enum.flat_map(fn line -> String.split(line, "\n") end)
+      |> Enum.map(&String.length/1)
+      |> Enum.max()
+
+    width =
+      case Keyword.fetch(options, :width) do
+        {:ok, width} ->
+          width
+
+        :error ->
+          max(@default_table_width, maximum_width)
+      end
+
+    options = Keyword.put(options, :width, width)
+    nr_of_cells = length(cells_content)
+
+    cells_with_options =
+      for {cell, index} <- Enum.with_index(cells_content, 0) do
+        cond do
+          index == 0 ->
+            {cell, Keyword.put(options, :top?, true)}
+
+          index == nr_of_cells - 1 ->
+            {cell, Keyword.put(options, :bottom?, true)}
+
+          true ->
+            {cell, options}
+        end
+      end
+
+    Enum.map(cells_with_options, fn {cell, opts} ->
+      three_sided_cell(cell, opts)
+    end)
+  end
+
+  defp hline(width) do
+    List.duplicate("─", width)
   end
 end

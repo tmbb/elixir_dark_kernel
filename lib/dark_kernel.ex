@@ -2,6 +2,7 @@ defmodule DarkKernel do
   @moduledoc """
   Documentation for `DarkKernel`.
   """
+  # alias DarkKernel.DarkKeywords
   alias DarkKernel.DarkKeywords
   alias DarkKernel.ShorterMaps
 
@@ -9,7 +10,7 @@ defmodule DarkKernel do
   Supercharged keyword lists.
   """
   defmacro sigil_k(contents, modifiers) do
-    DarkKeywords.do_sigil_k(contents, modifiers)
+    DarkKeywords.do_sigil_K(contents, modifiers, __CALLER__)
   end
 
   @default_modifier_m ?s

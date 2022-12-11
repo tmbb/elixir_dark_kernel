@@ -1,574 +1,575 @@
-# defmodule DarkKernel.DarkKeywords.VariableRebindingTest do
-#   use ExUnit.Case, async: true
-#   import ExUnitProperties
-#   import StreamData
+defmodule DarkKernel.DarkKeywords.VariableRebindingTest do
+  use ExUnit.Case, async: true
+  import ExUnitProperties
+  import StreamData
 
-#   import DarkKernel
+  import DarkKernel
 
-#   test "variable rebinding, example #1: 2 variables" do
-#     check all tps_Q! <- term(),
-#               dy7amI__TGNjx8 <- term(),
-#               var1 <- term(),
-#               var2 <- term() do
-#       # Keyword lists built with ~k[] have the value we expect:
-#       # -------------------------------------------------------
-#       assert ~k[tps_Q!, dy7amI__TGNjx8] == [tps_Q!: tps_Q!, dy7amI__TGNjx8: dy7amI__TGNjx8]
+  test "variable rebinding, example #1: 2 variables" do
+    check all h7XiwEQkybhxj! <- term(),
+              i <- term(),
+              var1 <- term(),
+              var2 <- term() do
+      # Keyword lists built with ~k[] have the value we expect:
+      # -------------------------------------------------------
+      assert ~k[h7XiwEQkybhxj!, i] == [h7XiwEQkybhxj!: h7XiwEQkybhxj!, i: i]
 
-#       # Test that variables are rebound successfully:
-#       # ---------------------------------------------
+      # Test that variables are rebound successfully:
+      # ---------------------------------------------
 
-#       # 1) Rebind the variables
-#       ~k[tps_Q!, dy7amI__TGNjx8] = [tps_Q!: var1, dy7amI__TGNjx8: var2]
+      # 1) Rebind the variables
+      ~k[h7XiwEQkybhxj!, i] = [h7XiwEQkybhxj!: var1, i: var2]
 
-#       # 2) Assert that each variable has the correct value
-#       assert tps_Q! == var1
-#       assert dy7amI__TGNjx8 == var2
-#     end
-#   end
+      # 2) Assert that each variable has the correct value
+      assert h7XiwEQkybhxj! == var1
+      assert i == var2
+    end
+  end
 
-#   test "variable rebinding, example #2: 3 variables" do
-#     check all uSJdir0V_ <- term(),
-#               xl_lQyfF <- term(),
-#               h <- term(),
-#               var1 <- term(),
-#               var2 <- term(),
-#               var3 <- term() do
-#       # Keyword lists built with ~k[] have the value we expect:
-#       # -------------------------------------------------------
-#       assert ~k[uSJdir0V_, xl_lQyfF, h] == [uSJdir0V_: uSJdir0V_, xl_lQyfF: xl_lQyfF, h: h]
+  test "variable rebinding, example #2: 3 variables" do
+    check all q? <- term(),
+              y_fW9_xZO <- term(),
+              iSg <- term(),
+              var1 <- term(),
+              var2 <- term(),
+              var3 <- term() do
+      # Keyword lists built with ~k[] have the value we expect:
+      # -------------------------------------------------------
+      assert ~k[q?, y_fW9_xZO, iSg] == [q?: q?, y_fW9_xZO: y_fW9_xZO, iSg: iSg]
 
-#       # Test that variables are rebound successfully:
-#       # ---------------------------------------------
+      # Test that variables are rebound successfully:
+      # ---------------------------------------------
 
-#       # 1) Rebind the variables
-#       ~k[uSJdir0V_, xl_lQyfF, h] = [uSJdir0V_: var1, xl_lQyfF: var2, h: var3]
+      # 1) Rebind the variables
+      ~k[q?, y_fW9_xZO, iSg] = [q?: var1, y_fW9_xZO: var2, iSg: var3]
 
-#       # 2) Assert that each variable has the correct value
-#       assert uSJdir0V_ == var1
-#       assert xl_lQyfF == var2
-#       assert h == var3
-#     end
-#   end
+      # 2) Assert that each variable has the correct value
+      assert q? == var1
+      assert y_fW9_xZO == var2
+      assert iSg == var3
+    end
+  end
 
-#   test "variable rebinding, example #3: 4 variables" do
-#     check all oumtdsSvqRhhns8 <- term(),
-#               dpemelZDzBmNxR? <- term(),
-#               t1 <- term(),
-#               gyE6_vH6Q <- term(),
-#               var1 <- term(),
-#               var2 <- term(),
-#               var3 <- term(),
-#               var4 <- term() do
-#       # Keyword lists built with ~k[] have the value we expect:
-#       # -------------------------------------------------------
-#       assert ~k[oumtdsSvqRhhns8, dpemelZDzBmNxR?, t1, gyE6_vH6Q] == [
-#                oumtdsSvqRhhns8: oumtdsSvqRhhns8,
-#                dpemelZDzBmNxR?: dpemelZDzBmNxR?,
-#                t1: t1,
-#                gyE6_vH6Q: gyE6_vH6Q
-#              ]
+  test "variable rebinding, example #3: 4 variables" do
+    check all v2RUamIB <- term(),
+              yf_yFpbZa? <- term(),
+              lCW1AaoK3BsOPPWT <- term(),
+              v_CiMahqeh? <- term(),
+              var1 <- term(),
+              var2 <- term(),
+              var3 <- term(),
+              var4 <- term() do
+      # Keyword lists built with ~k[] have the value we expect:
+      # -------------------------------------------------------
+      assert ~k[v2RUamIB, yf_yFpbZa?, lCW1AaoK3BsOPPWT, v_CiMahqeh?] == [
+               v2RUamIB: v2RUamIB,
+               yf_yFpbZa?: yf_yFpbZa?,
+               lCW1AaoK3BsOPPWT: lCW1AaoK3BsOPPWT,
+               v_CiMahqeh?: v_CiMahqeh?
+             ]
 
-#       # Test that variables are rebound successfully:
-#       # ---------------------------------------------
+      # Test that variables are rebound successfully:
+      # ---------------------------------------------
 
-#       # 1) Rebind the variables
-#       ~k[oumtdsSvqRhhns8, dpemelZDzBmNxR?, t1, gyE6_vH6Q] = [
-#         oumtdsSvqRhhns8: var1,
-#         dpemelZDzBmNxR?: var2,
-#         t1: var3,
-#         gyE6_vH6Q: var4
-#       ]
+      # 1) Rebind the variables
+      ~k[v2RUamIB, yf_yFpbZa?, lCW1AaoK3BsOPPWT, v_CiMahqeh?] = [
+        v2RUamIB: var1,
+        yf_yFpbZa?: var2,
+        lCW1AaoK3BsOPPWT: var3,
+        v_CiMahqeh?: var4
+      ]
 
-#       # 2) Assert that each variable has the correct value
-#       assert oumtdsSvqRhhns8 == var1
-#       assert dpemelZDzBmNxR? == var2
-#       assert t1 == var3
-#       assert gyE6_vH6Q == var4
-#     end
-#   end
+      # 2) Assert that each variable has the correct value
+      assert v2RUamIB == var1
+      assert yf_yFpbZa? == var2
+      assert lCW1AaoK3BsOPPWT == var3
+      assert v_CiMahqeh? == var4
+    end
+  end
 
-#   test "variable rebinding, example #4: 5 variables" do
-#     check all nNH? <- term(),
-#               mg_BVTcD6BwZ_zw <- term(),
-#               wATQGVTf4aBWbgK <- term(),
-#               k_uuJQFkR5DAEN? <- term(),
-#               mw9__HvJQVBJ1? <- term(),
-#               var1 <- term(),
-#               var2 <- term(),
-#               var3 <- term(),
-#               var4 <- term(),
-#               var5 <- term() do
-#       # Keyword lists built with ~k[] have the value we expect:
-#       # -------------------------------------------------------
-#       assert ~k[nNH?, mg_BVTcD6BwZ_zw, wATQGVTf4aBWbgK, k_uuJQFkR5DAEN?, mw9__HvJQVBJ1?] == [
-#                nNH?: nNH?,
-#                mg_BVTcD6BwZ_zw: mg_BVTcD6BwZ_zw,
-#                wATQGVTf4aBWbgK: wATQGVTf4aBWbgK,
-#                k_uuJQFkR5DAEN?: k_uuJQFkR5DAEN?,
-#                mw9__HvJQVBJ1?: mw9__HvJQVBJ1?
-#              ]
+  test "variable rebinding, example #4: 5 variables" do
+    check all vJ_6tXr? <- term(),
+              h! <- term(),
+              kiA33z_0R6 <- term(),
+              de <- term(),
+              xqgw! <- term(),
+              var1 <- term(),
+              var2 <- term(),
+              var3 <- term(),
+              var4 <- term(),
+              var5 <- term() do
+      # Keyword lists built with ~k[] have the value we expect:
+      # -------------------------------------------------------
+      assert ~k[vJ_6tXr?, h!, kiA33z_0R6, de, xqgw!] == [
+               vJ_6tXr?: vJ_6tXr?,
+               h!: h!,
+               kiA33z_0R6: kiA33z_0R6,
+               de: de,
+               xqgw!: xqgw!
+             ]
 
-#       # Test that variables are rebound successfully:
-#       # ---------------------------------------------
+      # Test that variables are rebound successfully:
+      # ---------------------------------------------
 
-#       # 1) Rebind the variables
-#       ~k[nNH?, mg_BVTcD6BwZ_zw, wATQGVTf4aBWbgK, k_uuJQFkR5DAEN?, mw9__HvJQVBJ1?] = [
-#         nNH?: var1,
-#         mg_BVTcD6BwZ_zw: var2,
-#         wATQGVTf4aBWbgK: var3,
-#         k_uuJQFkR5DAEN?: var4,
-#         mw9__HvJQVBJ1?: var5
-#       ]
+      # 1) Rebind the variables
+      ~k[vJ_6tXr?, h!, kiA33z_0R6, de, xqgw!] = [
+        vJ_6tXr?: var1,
+        h!: var2,
+        kiA33z_0R6: var3,
+        de: var4,
+        xqgw!: var5
+      ]
 
-#       # 2) Assert that each variable has the correct value
-#       assert nNH? == var1
-#       assert mg_BVTcD6BwZ_zw == var2
-#       assert wATQGVTf4aBWbgK == var3
-#       assert k_uuJQFkR5DAEN? == var4
-#       assert mw9__HvJQVBJ1? == var5
-#     end
-#   end
+      # 2) Assert that each variable has the correct value
+      assert vJ_6tXr? == var1
+      assert h! == var2
+      assert kiA33z_0R6 == var3
+      assert de == var4
+      assert xqgw! == var5
+    end
+  end
 
-#   test "variable rebinding, example #5: 6 variables" do
-#     check all wu_nxDn9pfhTR? <- term(),
-#               kjhV4vMdLQ__! <- term(),
-#               ezVZgPq_ <- term(),
-#               zdFxi <- term(),
-#               m8shCYPt? <- term(),
-#               j3DyFTD3N! <- term(),
-#               var1 <- term(),
-#               var2 <- term(),
-#               var3 <- term(),
-#               var4 <- term(),
-#               var5 <- term(),
-#               var6 <- term() do
-#       # Keyword lists built with ~k[] have the value we expect:
-#       # -------------------------------------------------------
-#       assert ~k[wu_nxDn9pfhTR?, kjhV4vMdLQ__!, ezVZgPq_, zdFxi, m8shCYPt?, j3DyFTD3N!] == [
-#                wu_nxDn9pfhTR?: wu_nxDn9pfhTR?,
-#                kjhV4vMdLQ__!: kjhV4vMdLQ__!,
-#                ezVZgPq_: ezVZgPq_,
-#                zdFxi: zdFxi,
-#                m8shCYPt?: m8shCYPt?,
-#                j3DyFTD3N!: j3DyFTD3N!
-#              ]
+  test "variable rebinding, example #5: 6 variables" do
+    check all ya <- term(),
+              pC2o! <- term(),
+              zE <- term(),
+              p_Q? <- term(),
+              uGLX? <- term(),
+              t? <- term(),
+              var1 <- term(),
+              var2 <- term(),
+              var3 <- term(),
+              var4 <- term(),
+              var5 <- term(),
+              var6 <- term() do
+      # Keyword lists built with ~k[] have the value we expect:
+      # -------------------------------------------------------
+      assert ~k[ya, pC2o!, zE, p_Q?, uGLX?, t?] == [
+               ya: ya,
+               pC2o!: pC2o!,
+               zE: zE,
+               p_Q?: p_Q?,
+               uGLX?: uGLX?,
+               t?: t?
+             ]
 
-#       # Test that variables are rebound successfully:
-#       # ---------------------------------------------
+      # Test that variables are rebound successfully:
+      # ---------------------------------------------
 
-#       # 1) Rebind the variables
-#       ~k[wu_nxDn9pfhTR?, kjhV4vMdLQ__!, ezVZgPq_, zdFxi, m8shCYPt?, j3DyFTD3N!] = [
-#         wu_nxDn9pfhTR?: var1,
-#         kjhV4vMdLQ__!: var2,
-#         ezVZgPq_: var3,
-#         zdFxi: var4,
-#         m8shCYPt?: var5,
-#         j3DyFTD3N!: var6
-#       ]
+      # 1) Rebind the variables
+      ~k[ya, pC2o!, zE, p_Q?, uGLX?, t?] = [
+        ya: var1,
+        pC2o!: var2,
+        zE: var3,
+        p_Q?: var4,
+        uGLX?: var5,
+        t?: var6
+      ]
 
-#       # 2) Assert that each variable has the correct value
-#       assert wu_nxDn9pfhTR? == var1
-#       assert kjhV4vMdLQ__! == var2
-#       assert ezVZgPq_ == var3
-#       assert zdFxi == var4
-#       assert m8shCYPt? == var5
-#       assert j3DyFTD3N! == var6
-#     end
-#   end
+      # 2) Assert that each variable has the correct value
+      assert ya == var1
+      assert pC2o! == var2
+      assert zE == var3
+      assert p_Q? == var4
+      assert uGLX? == var5
+      assert t? == var6
+    end
+  end
 
-#   test "variable rebinding, example #6: 7 variables" do
-#     check all hj! <- term(),
-#               wtB_mzmt__ObGUH! <- term(),
-#               zBS_Yx_PJq9qg_c <- term(),
-#               ofVNhfvZNAlNzCF <- term(),
-#               tD6_y? <- term(),
-#               cFEo_5hsqgn <- term(),
-#               z_l9nbV! <- term(),
-#               var1 <- term(),
-#               var2 <- term(),
-#               var3 <- term(),
-#               var4 <- term(),
-#               var5 <- term(),
-#               var6 <- term(),
-#               var7 <- term() do
-#       # Keyword lists built with ~k[] have the value we expect:
-#       # -------------------------------------------------------
-#       assert ~k[hj!, wtB_mzmt__ObGUH!, zBS_Yx_PJq9qg_c, ofVNhfvZNAlNzCF, tD6_y?, cFEo_5hsqgn, z_l9nbV!] ==
-#                [
-#                  hj!: hj!,
-#                  wtB_mzmt__ObGUH!: wtB_mzmt__ObGUH!,
-#                  zBS_Yx_PJq9qg_c: zBS_Yx_PJq9qg_c,
-#                  ofVNhfvZNAlNzCF: ofVNhfvZNAlNzCF,
-#                  tD6_y?: tD6_y?,
-#                  cFEo_5hsqgn: cFEo_5hsqgn,
-#                  z_l9nbV!: z_l9nbV!
-#                ]
+  test "variable rebinding, example #6: 7 variables" do
+    check all emmuvDkRG__! <- term(),
+              iXp6FDfec_G <- term(),
+              mFB <- term(),
+              cs <- term(),
+              wC9s? <- term(),
+              n5AEjWJ0CM9? <- term(),
+              o_wrp8nr9hHzw_! <- term(),
+              var1 <- term(),
+              var2 <- term(),
+              var3 <- term(),
+              var4 <- term(),
+              var5 <- term(),
+              var6 <- term(),
+              var7 <- term() do
+      # Keyword lists built with ~k[] have the value we expect:
+      # -------------------------------------------------------
+      assert ~k[emmuvDkRG__!, iXp6FDfec_G, mFB, cs, wC9s?, n5AEjWJ0CM9?, o_wrp8nr9hHzw_!] == [
+               emmuvDkRG__!: emmuvDkRG__!,
+               iXp6FDfec_G: iXp6FDfec_G,
+               mFB: mFB,
+               cs: cs,
+               wC9s?: wC9s?,
+               n5AEjWJ0CM9?: n5AEjWJ0CM9?,
+               o_wrp8nr9hHzw_!: o_wrp8nr9hHzw_!
+             ]
 
-#       # Test that variables are rebound successfully:
-#       # ---------------------------------------------
+      # Test that variables are rebound successfully:
+      # ---------------------------------------------
 
-#       # 1) Rebind the variables
-#       ~k[hj!, wtB_mzmt__ObGUH!, zBS_Yx_PJq9qg_c, ofVNhfvZNAlNzCF, tD6_y?, cFEo_5hsqgn, z_l9nbV!] =
-#         [
-#           hj!: var1,
-#           wtB_mzmt__ObGUH!: var2,
-#           zBS_Yx_PJq9qg_c: var3,
-#           ofVNhfvZNAlNzCF: var4,
-#           tD6_y?: var5,
-#           cFEo_5hsqgn: var6,
-#           z_l9nbV!: var7
-#         ]
+      # 1) Rebind the variables
+      ~k[emmuvDkRG__!, iXp6FDfec_G, mFB, cs, wC9s?, n5AEjWJ0CM9?, o_wrp8nr9hHzw_!] = [
+        emmuvDkRG__!: var1,
+        iXp6FDfec_G: var2,
+        mFB: var3,
+        cs: var4,
+        wC9s?: var5,
+        n5AEjWJ0CM9?: var6,
+        o_wrp8nr9hHzw_!: var7
+      ]
 
-#       # 2) Assert that each variable has the correct value
-#       assert hj! == var1
-#       assert wtB_mzmt__ObGUH! == var2
-#       assert zBS_Yx_PJq9qg_c == var3
-#       assert ofVNhfvZNAlNzCF == var4
-#       assert tD6_y? == var5
-#       assert cFEo_5hsqgn == var6
-#       assert z_l9nbV! == var7
-#     end
-#   end
+      # 2) Assert that each variable has the correct value
+      assert emmuvDkRG__! == var1
+      assert iXp6FDfec_G == var2
+      assert mFB == var3
+      assert cs == var4
+      assert wC9s? == var5
+      assert n5AEjWJ0CM9? == var6
+      assert o_wrp8nr9hHzw_! == var7
+    end
+  end
 
-#   test "variable rebinding, example #7: 8 variables" do
-#     check all oRFM4 <- term(),
-#               poweCklgNmEI4kL7! <- term(),
-#               s4T0 <- term(),
-#               oAI7wpuHe! <- term(),
-#               j_ <- term(),
-#               g62W <- term(),
-#               rLn_U <- term(),
-#               fv35zXp_ <- term(),
-#               var1 <- term(),
-#               var2 <- term(),
-#               var3 <- term(),
-#               var4 <- term(),
-#               var5 <- term(),
-#               var6 <- term(),
-#               var7 <- term(),
-#               var8 <- term() do
-#       # Keyword lists built with ~k[] have the value we expect:
-#       # -------------------------------------------------------
-#       assert ~k[oRFM4, poweCklgNmEI4kL7!, s4T0, oAI7wpuHe!, j_, g62W, rLn_U, fv35zXp_] == [
-#                oRFM4: oRFM4,
-#                poweCklgNmEI4kL7!: poweCklgNmEI4kL7!,
-#                s4T0: s4T0,
-#                oAI7wpuHe!: oAI7wpuHe!,
-#                j_: j_,
-#                g62W: g62W,
-#                rLn_U: rLn_U,
-#                fv35zXp_: fv35zXp_
-#              ]
+  test "variable rebinding, example #7: 8 variables" do
+    check all aGrLji1iNn? <- term(),
+              d0dSyO9Gh__PFw6? <- term(),
+              t_ru_WjdCmc <- term(),
+              d <- term(),
+              bXVVrTn_d <- term(),
+              tICP0_mN969Ap! <- term(),
+              e8iKepRIS__AXSc? <- term(),
+              g0uQEChDL__7v! <- term(),
+              var1 <- term(),
+              var2 <- term(),
+              var3 <- term(),
+              var4 <- term(),
+              var5 <- term(),
+              var6 <- term(),
+              var7 <- term(),
+              var8 <- term() do
+      # Keyword lists built with ~k[] have the value we expect:
+      # -------------------------------------------------------
+      assert ~k[aGrLji1iNn?, d0dSyO9Gh__PFw6?, t_ru_WjdCmc, d, bXVVrTn_d, tICP0_mN969Ap!, e8iKepRIS__AXSc?, g0uQEChDL__7v!] ==
+               [
+                 aGrLji1iNn?: aGrLji1iNn?,
+                 d0dSyO9Gh__PFw6?: d0dSyO9Gh__PFw6?,
+                 t_ru_WjdCmc: t_ru_WjdCmc,
+                 d: d,
+                 bXVVrTn_d: bXVVrTn_d,
+                 tICP0_mN969Ap!: tICP0_mN969Ap!,
+                 e8iKepRIS__AXSc?: e8iKepRIS__AXSc?,
+                 g0uQEChDL__7v!: g0uQEChDL__7v!
+               ]
 
-#       # Test that variables are rebound successfully:
-#       # ---------------------------------------------
+      # Test that variables are rebound successfully:
+      # ---------------------------------------------
 
-#       # 1) Rebind the variables
-#       ~k[oRFM4, poweCklgNmEI4kL7!, s4T0, oAI7wpuHe!, j_, g62W, rLn_U, fv35zXp_] = [
-#         oRFM4: var1,
-#         poweCklgNmEI4kL7!: var2,
-#         s4T0: var3,
-#         oAI7wpuHe!: var4,
-#         j_: var5,
-#         g62W: var6,
-#         rLn_U: var7,
-#         fv35zXp_: var8
-#       ]
+      # 1) Rebind the variables
+      ~k[aGrLji1iNn?, d0dSyO9Gh__PFw6?, t_ru_WjdCmc, d, bXVVrTn_d, tICP0_mN969Ap!, e8iKepRIS__AXSc?, g0uQEChDL__7v!] =
+        [
+          aGrLji1iNn?: var1,
+          d0dSyO9Gh__PFw6?: var2,
+          t_ru_WjdCmc: var3,
+          d: var4,
+          bXVVrTn_d: var5,
+          tICP0_mN969Ap!: var6,
+          e8iKepRIS__AXSc?: var7,
+          g0uQEChDL__7v!: var8
+        ]
 
-#       # 2) Assert that each variable has the correct value
-#       assert oRFM4 == var1
-#       assert poweCklgNmEI4kL7! == var2
-#       assert s4T0 == var3
-#       assert oAI7wpuHe! == var4
-#       assert j_ == var5
-#       assert g62W == var6
-#       assert rLn_U == var7
-#       assert fv35zXp_ == var8
-#     end
-#   end
+      # 2) Assert that each variable has the correct value
+      assert aGrLji1iNn? == var1
+      assert d0dSyO9Gh__PFw6? == var2
+      assert t_ru_WjdCmc == var3
+      assert d == var4
+      assert bXVVrTn_d == var5
+      assert tICP0_mN969Ap! == var6
+      assert e8iKepRIS__AXSc? == var7
+      assert g0uQEChDL__7v! == var8
+    end
+  end
 
-#   test "variable rebinding, example #8: 9 variables" do
-#     check all eE_fTer_E__o! <- term(),
-#               bFeb__Z <- term(),
-#               hL_y <- term(),
-#               cpfsSGnz_tdF_R <- term(),
-#               ce4ADAbZ52 <- term(),
-#               sLV_ <- term(),
-#               ghE? <- term(),
-#               mZMFNtwWuoV <- term(),
-#               s <- term(),
-#               var1 <- term(),
-#               var2 <- term(),
-#               var3 <- term(),
-#               var4 <- term(),
-#               var5 <- term(),
-#               var6 <- term(),
-#               var7 <- term(),
-#               var8 <- term(),
-#               var9 <- term() do
-#       # Keyword lists built with ~k[] have the value we expect:
-#       # -------------------------------------------------------
-#       assert ~k[eE_fTer_E__o!, bFeb__Z, hL_y, cpfsSGnz_tdF_R, ce4ADAbZ52, sLV_, ghE?, mZMFNtwWuoV, s] ==
-#                [
-#                  eE_fTer_E__o!: eE_fTer_E__o!,
-#                  bFeb__Z: bFeb__Z,
-#                  hL_y: hL_y,
-#                  cpfsSGnz_tdF_R: cpfsSGnz_tdF_R,
-#                  ce4ADAbZ52: ce4ADAbZ52,
-#                  sLV_: sLV_,
-#                  ghE?: ghE?,
-#                  mZMFNtwWuoV: mZMFNtwWuoV,
-#                  s: s
-#                ]
+  test "variable rebinding, example #8: 9 variables" do
+    check all ot__s_o3x? <- term(),
+              de? <- term(),
+              l1_9n6uM! <- term(),
+              hk_8eZ! <- term(),
+              f <- term(),
+              hq90oRL5_w4W28O! <- term(),
+              lgdSYM2iv <- term(),
+              pDprsTcaQWfncAz? <- term(),
+              a0VBPRsPaVU_p <- term(),
+              var1 <- term(),
+              var2 <- term(),
+              var3 <- term(),
+              var4 <- term(),
+              var5 <- term(),
+              var6 <- term(),
+              var7 <- term(),
+              var8 <- term(),
+              var9 <- term() do
+      # Keyword lists built with ~k[] have the value we expect:
+      # -------------------------------------------------------
+      assert ~k[ot__s_o3x?, de?, l1_9n6uM!, hk_8eZ!, f, hq90oRL5_w4W28O!, lgdSYM2iv, pDprsTcaQWfncAz?, a0VBPRsPaVU_p] ==
+               [
+                 ot__s_o3x?: ot__s_o3x?,
+                 de?: de?,
+                 l1_9n6uM!: l1_9n6uM!,
+                 hk_8eZ!: hk_8eZ!,
+                 f: f,
+                 hq90oRL5_w4W28O!: hq90oRL5_w4W28O!,
+                 lgdSYM2iv: lgdSYM2iv,
+                 pDprsTcaQWfncAz?: pDprsTcaQWfncAz?,
+                 a0VBPRsPaVU_p: a0VBPRsPaVU_p
+               ]
 
-#       # Test that variables are rebound successfully:
-#       # ---------------------------------------------
+      # Test that variables are rebound successfully:
+      # ---------------------------------------------
 
-#       # 1) Rebind the variables
-#       ~k[eE_fTer_E__o!, bFeb__Z, hL_y, cpfsSGnz_tdF_R, ce4ADAbZ52, sLV_, ghE?, mZMFNtwWuoV, s] = [
-#         eE_fTer_E__o!: var1,
-#         bFeb__Z: var2,
-#         hL_y: var3,
-#         cpfsSGnz_tdF_R: var4,
-#         ce4ADAbZ52: var5,
-#         sLV_: var6,
-#         ghE?: var7,
-#         mZMFNtwWuoV: var8,
-#         s: var9
-#       ]
+      # 1) Rebind the variables
+      ~k[ot__s_o3x?, de?, l1_9n6uM!, hk_8eZ!, f, hq90oRL5_w4W28O!, lgdSYM2iv, pDprsTcaQWfncAz?, a0VBPRsPaVU_p] =
+        [
+          ot__s_o3x?: var1,
+          de?: var2,
+          l1_9n6uM!: var3,
+          hk_8eZ!: var4,
+          f: var5,
+          hq90oRL5_w4W28O!: var6,
+          lgdSYM2iv: var7,
+          pDprsTcaQWfncAz?: var8,
+          a0VBPRsPaVU_p: var9
+        ]
 
-#       # 2) Assert that each variable has the correct value
-#       assert eE_fTer_E__o! == var1
-#       assert bFeb__Z == var2
-#       assert hL_y == var3
-#       assert cpfsSGnz_tdF_R == var4
-#       assert ce4ADAbZ52 == var5
-#       assert sLV_ == var6
-#       assert ghE? == var7
-#       assert mZMFNtwWuoV == var8
-#       assert s == var9
-#     end
-#   end
+      # 2) Assert that each variable has the correct value
+      assert ot__s_o3x? == var1
+      assert de? == var2
+      assert l1_9n6uM! == var3
+      assert hk_8eZ! == var4
+      assert f == var5
+      assert hq90oRL5_w4W28O! == var6
+      assert lgdSYM2iv == var7
+      assert pDprsTcaQWfncAz? == var8
+      assert a0VBPRsPaVU_p == var9
+    end
+  end
 
-#   test "variable rebinding, example #9: 10 variables" do
-#     check all o5Uh7sBjK8cZZ! <- term(),
-#               wvC2oc0_Mts <- term(),
-#               aoPu0XBuQ <- term(),
-#               g80Uf? <- term(),
-#               qEULvB_bO <- term(),
-#               bmuBXG? <- term(),
-#               bM2! <- term(),
-#               li0uaNHGU83? <- term(),
-#               pnFLiLgLoY <- term(),
-#               cn9_IfzL? <- term(),
-#               var1 <- term(),
-#               var2 <- term(),
-#               var3 <- term(),
-#               var4 <- term(),
-#               var5 <- term(),
-#               var6 <- term(),
-#               var7 <- term(),
-#               var8 <- term(),
-#               var9 <- term(),
-#               var10 <- term() do
-#       # Keyword lists built with ~k[] have the value we expect:
-#       # -------------------------------------------------------
-#       assert ~k[o5Uh7sBjK8cZZ!, wvC2oc0_Mts, aoPu0XBuQ, g80Uf?, qEULvB_bO, bmuBXG?, bM2!, li0uaNHGU83?, pnFLiLgLoY, cn9_IfzL?] ==
-#                [
-#                  o5Uh7sBjK8cZZ!: o5Uh7sBjK8cZZ!,
-#                  wvC2oc0_Mts: wvC2oc0_Mts,
-#                  aoPu0XBuQ: aoPu0XBuQ,
-#                  g80Uf?: g80Uf?,
-#                  qEULvB_bO: qEULvB_bO,
-#                  bmuBXG?: bmuBXG?,
-#                  bM2!: bM2!,
-#                  li0uaNHGU83?: li0uaNHGU83?,
-#                  pnFLiLgLoY: pnFLiLgLoY,
-#                  cn9_IfzL?: cn9_IfzL?
-#                ]
+  test "variable rebinding, example #9: 10 variables" do
+    check all ezw5gpmLFnq5C? <- term(),
+              tlZpvD5ALl? <- term(),
+              eY00e_lH? <- term(),
+              q749hO? <- term(),
+              tQAj_f9pMy9_ <- term(),
+              t_r_aTI_TKMY_b <- term(),
+              aY <- term(),
+              tE <- term(),
+              k4D_r4bF_3lI_ <- term(),
+              obUQ_ <- term(),
+              var1 <- term(),
+              var2 <- term(),
+              var3 <- term(),
+              var4 <- term(),
+              var5 <- term(),
+              var6 <- term(),
+              var7 <- term(),
+              var8 <- term(),
+              var9 <- term(),
+              var10 <- term() do
+      # Keyword lists built with ~k[] have the value we expect:
+      # -------------------------------------------------------
+      assert ~k[ezw5gpmLFnq5C?, tlZpvD5ALl?, eY00e_lH?, q749hO?, tQAj_f9pMy9_, t_r_aTI_TKMY_b, aY, tE, k4D_r4bF_3lI_, obUQ_] ==
+               [
+                 ezw5gpmLFnq5C?: ezw5gpmLFnq5C?,
+                 tlZpvD5ALl?: tlZpvD5ALl?,
+                 eY00e_lH?: eY00e_lH?,
+                 q749hO?: q749hO?,
+                 tQAj_f9pMy9_: tQAj_f9pMy9_,
+                 t_r_aTI_TKMY_b: t_r_aTI_TKMY_b,
+                 aY: aY,
+                 tE: tE,
+                 k4D_r4bF_3lI_: k4D_r4bF_3lI_,
+                 obUQ_: obUQ_
+               ]
 
-#       # Test that variables are rebound successfully:
-#       # ---------------------------------------------
+      # Test that variables are rebound successfully:
+      # ---------------------------------------------
 
-#       # 1) Rebind the variables
-#       ~k[o5Uh7sBjK8cZZ!, wvC2oc0_Mts, aoPu0XBuQ, g80Uf?, qEULvB_bO, bmuBXG?, bM2!, li0uaNHGU83?, pnFLiLgLoY, cn9_IfzL?] =
-#         [
-#           o5Uh7sBjK8cZZ!: var1,
-#           wvC2oc0_Mts: var2,
-#           aoPu0XBuQ: var3,
-#           g80Uf?: var4,
-#           qEULvB_bO: var5,
-#           bmuBXG?: var6,
-#           bM2!: var7,
-#           li0uaNHGU83?: var8,
-#           pnFLiLgLoY: var9,
-#           cn9_IfzL?: var10
-#         ]
+      # 1) Rebind the variables
+      ~k[ezw5gpmLFnq5C?, tlZpvD5ALl?, eY00e_lH?, q749hO?, tQAj_f9pMy9_, t_r_aTI_TKMY_b, aY, tE, k4D_r4bF_3lI_, obUQ_] =
+        [
+          ezw5gpmLFnq5C?: var1,
+          tlZpvD5ALl?: var2,
+          eY00e_lH?: var3,
+          q749hO?: var4,
+          tQAj_f9pMy9_: var5,
+          t_r_aTI_TKMY_b: var6,
+          aY: var7,
+          tE: var8,
+          k4D_r4bF_3lI_: var9,
+          obUQ_: var10
+        ]
 
-#       # 2) Assert that each variable has the correct value
-#       assert o5Uh7sBjK8cZZ! == var1
-#       assert wvC2oc0_Mts == var2
-#       assert aoPu0XBuQ == var3
-#       assert g80Uf? == var4
-#       assert qEULvB_bO == var5
-#       assert bmuBXG? == var6
-#       assert bM2! == var7
-#       assert li0uaNHGU83? == var8
-#       assert pnFLiLgLoY == var9
-#       assert cn9_IfzL? == var10
-#     end
-#   end
+      # 2) Assert that each variable has the correct value
+      assert ezw5gpmLFnq5C? == var1
+      assert tlZpvD5ALl? == var2
+      assert eY00e_lH? == var3
+      assert q749hO? == var4
+      assert tQAj_f9pMy9_ == var5
+      assert t_r_aTI_TKMY_b == var6
+      assert aY == var7
+      assert tE == var8
+      assert k4D_r4bF_3lI_ == var9
+      assert obUQ_ == var10
+    end
+  end
 
-#   test "variable rebinding, example #10: 11 variables" do
-#     check all sHI_! <- term(),
-#               uN? <- term(),
-#               w! <- term(),
-#               iT0W_LHOXO <- term(),
-#               w4O! <- term(),
-#               t68Lr15xF <- term(),
-#               xylfzVK5n2Z? <- term(),
-#               jv_H6u_Zhkej <- term(),
-#               k6yr_xQ_vnXoSZ8 <- term(),
-#               b5P3HlvGH_1! <- term(),
-#               oPab <- term(),
-#               var1 <- term(),
-#               var2 <- term(),
-#               var3 <- term(),
-#               var4 <- term(),
-#               var5 <- term(),
-#               var6 <- term(),
-#               var7 <- term(),
-#               var8 <- term(),
-#               var9 <- term(),
-#               var10 <- term(),
-#               var11 <- term() do
-#       # Keyword lists built with ~k[] have the value we expect:
-#       # -------------------------------------------------------
-#       assert ~k[sHI_!, uN?, w!, iT0W_LHOXO, w4O!, t68Lr15xF, xylfzVK5n2Z?, jv_H6u_Zhkej, k6yr_xQ_vnXoSZ8, b5P3HlvGH_1!, oPab] ==
-#                [
-#                  sHI_!: sHI_!,
-#                  uN?: uN?,
-#                  w!: w!,
-#                  iT0W_LHOXO: iT0W_LHOXO,
-#                  w4O!: w4O!,
-#                  t68Lr15xF: t68Lr15xF,
-#                  xylfzVK5n2Z?: xylfzVK5n2Z?,
-#                  jv_H6u_Zhkej: jv_H6u_Zhkej,
-#                  k6yr_xQ_vnXoSZ8: k6yr_xQ_vnXoSZ8,
-#                  b5P3HlvGH_1!: b5P3HlvGH_1!,
-#                  oPab: oPab
-#                ]
+  test "variable rebinding, example #10: 11 variables" do
+    check all hgY0Q_Ii? <- term(),
+              t <- term(),
+              cr_4fWwW_ClEOA <- term(),
+              kQG7coZL9gy? <- term(),
+              fXkVzohNOF06mc71? <- term(),
+              i2! <- term(),
+              nToc <- term(),
+              krYhVSLjTnFIR? <- term(),
+              fIOEDh2! <- term(),
+              rPisYozw_s5mH <- term(),
+              plw_e4PsE9s_I21i <- term(),
+              var1 <- term(),
+              var2 <- term(),
+              var3 <- term(),
+              var4 <- term(),
+              var5 <- term(),
+              var6 <- term(),
+              var7 <- term(),
+              var8 <- term(),
+              var9 <- term(),
+              var10 <- term(),
+              var11 <- term() do
+      # Keyword lists built with ~k[] have the value we expect:
+      # -------------------------------------------------------
+      assert ~k[hgY0Q_Ii?, t, cr_4fWwW_ClEOA, kQG7coZL9gy?, fXkVzohNOF06mc71?, i2!, nToc, krYhVSLjTnFIR?, fIOEDh2!, rPisYozw_s5mH, plw_e4PsE9s_I21i] ==
+               [
+                 hgY0Q_Ii?: hgY0Q_Ii?,
+                 t: t,
+                 cr_4fWwW_ClEOA: cr_4fWwW_ClEOA,
+                 kQG7coZL9gy?: kQG7coZL9gy?,
+                 fXkVzohNOF06mc71?: fXkVzohNOF06mc71?,
+                 i2!: i2!,
+                 nToc: nToc,
+                 krYhVSLjTnFIR?: krYhVSLjTnFIR?,
+                 fIOEDh2!: fIOEDh2!,
+                 rPisYozw_s5mH: rPisYozw_s5mH,
+                 plw_e4PsE9s_I21i: plw_e4PsE9s_I21i
+               ]
 
-#       # Test that variables are rebound successfully:
-#       # ---------------------------------------------
+      # Test that variables are rebound successfully:
+      # ---------------------------------------------
 
-#       # 1) Rebind the variables
-#       ~k[sHI_!, uN?, w!, iT0W_LHOXO, w4O!, t68Lr15xF, xylfzVK5n2Z?, jv_H6u_Zhkej, k6yr_xQ_vnXoSZ8, b5P3HlvGH_1!, oPab] =
-#         [
-#           sHI_!: var1,
-#           uN?: var2,
-#           w!: var3,
-#           iT0W_LHOXO: var4,
-#           w4O!: var5,
-#           t68Lr15xF: var6,
-#           xylfzVK5n2Z?: var7,
-#           jv_H6u_Zhkej: var8,
-#           k6yr_xQ_vnXoSZ8: var9,
-#           b5P3HlvGH_1!: var10,
-#           oPab: var11
-#         ]
+      # 1) Rebind the variables
+      ~k[hgY0Q_Ii?, t, cr_4fWwW_ClEOA, kQG7coZL9gy?, fXkVzohNOF06mc71?, i2!, nToc, krYhVSLjTnFIR?, fIOEDh2!, rPisYozw_s5mH, plw_e4PsE9s_I21i] =
+        [
+          hgY0Q_Ii?: var1,
+          t: var2,
+          cr_4fWwW_ClEOA: var3,
+          kQG7coZL9gy?: var4,
+          fXkVzohNOF06mc71?: var5,
+          i2!: var6,
+          nToc: var7,
+          krYhVSLjTnFIR?: var8,
+          fIOEDh2!: var9,
+          rPisYozw_s5mH: var10,
+          plw_e4PsE9s_I21i: var11
+        ]
 
-#       # 2) Assert that each variable has the correct value
-#       assert sHI_! == var1
-#       assert uN? == var2
-#       assert w! == var3
-#       assert iT0W_LHOXO == var4
-#       assert w4O! == var5
-#       assert t68Lr15xF == var6
-#       assert xylfzVK5n2Z? == var7
-#       assert jv_H6u_Zhkej == var8
-#       assert k6yr_xQ_vnXoSZ8 == var9
-#       assert b5P3HlvGH_1! == var10
-#       assert oPab == var11
-#     end
-#   end
+      # 2) Assert that each variable has the correct value
+      assert hgY0Q_Ii? == var1
+      assert t == var2
+      assert cr_4fWwW_ClEOA == var3
+      assert kQG7coZL9gy? == var4
+      assert fXkVzohNOF06mc71? == var5
+      assert i2! == var6
+      assert nToc == var7
+      assert krYhVSLjTnFIR? == var8
+      assert fIOEDh2! == var9
+      assert rPisYozw_s5mH == var10
+      assert plw_e4PsE9s_I21i == var11
+    end
+  end
 
-#   test "variable rebinding, example #11: 12 variables" do
-#     check all qVzlQ? <- term(),
-#               d! <- term(),
-#               miZyQ1Dz1tZEbv <- term(),
-#               s4ICRlb8K! <- term(),
-#               b_iLzEIj_UUHof? <- term(),
-#               h_M_n5yBY74 <- term(),
-#               dydBYfqTd! <- term(),
-#               vky? <- term(),
-#               i? <- term(),
-#               xcVGea? <- term(),
-#               dwPoUca_Wh <- term(),
-#               t8yBUdM <- term(),
-#               var1 <- term(),
-#               var2 <- term(),
-#               var3 <- term(),
-#               var4 <- term(),
-#               var5 <- term(),
-#               var6 <- term(),
-#               var7 <- term(),
-#               var8 <- term(),
-#               var9 <- term(),
-#               var10 <- term(),
-#               var11 <- term(),
-#               var12 <- term() do
-#       # Keyword lists built with ~k[] have the value we expect:
-#       # -------------------------------------------------------
-#       assert ~k[qVzlQ?, d!, miZyQ1Dz1tZEbv, s4ICRlb8K!, b_iLzEIj_UUHof?, h_M_n5yBY74, dydBYfqTd!, vky?, i?, xcVGea?, dwPoUca_Wh, t8yBUdM] ==
-#                [
-#                  qVzlQ?: qVzlQ?,
-#                  d!: d!,
-#                  miZyQ1Dz1tZEbv: miZyQ1Dz1tZEbv,
-#                  s4ICRlb8K!: s4ICRlb8K!,
-#                  b_iLzEIj_UUHof?: b_iLzEIj_UUHof?,
-#                  h_M_n5yBY74: h_M_n5yBY74,
-#                  dydBYfqTd!: dydBYfqTd!,
-#                  vky?: vky?,
-#                  i?: i?,
-#                  xcVGea?: xcVGea?,
-#                  dwPoUca_Wh: dwPoUca_Wh,
-#                  t8yBUdM: t8yBUdM
-#                ]
+  test "variable rebinding, example #11: 12 variables" do
+    check all nKo9DtVMD <- term(),
+              gW_H__Fb_RG_lZ <- term(),
+              wW45 <- term(),
+              oKi1CmarKYyX__3? <- term(),
+              v4TaAxcr_6fCJ! <- term(),
+              htR! <- term(),
+              u79kDK9sk? <- term(),
+              uwUWqKIRwFYXI! <- term(),
+              jROQmVEMbN_ <- term(),
+              tsYK3ZYr <- term(),
+              k_37pChYfnZ <- term(),
+              gu_uuIAyV7! <- term(),
+              var1 <- term(),
+              var2 <- term(),
+              var3 <- term(),
+              var4 <- term(),
+              var5 <- term(),
+              var6 <- term(),
+              var7 <- term(),
+              var8 <- term(),
+              var9 <- term(),
+              var10 <- term(),
+              var11 <- term(),
+              var12 <- term() do
+      # Keyword lists built with ~k[] have the value we expect:
+      # -------------------------------------------------------
+      assert ~k[nKo9DtVMD, gW_H__Fb_RG_lZ, wW45, oKi1CmarKYyX__3?, v4TaAxcr_6fCJ!, htR!, u79kDK9sk?, uwUWqKIRwFYXI!, jROQmVEMbN_, tsYK3ZYr, k_37pChYfnZ, gu_uuIAyV7!] ==
+               [
+                 nKo9DtVMD: nKo9DtVMD,
+                 gW_H__Fb_RG_lZ: gW_H__Fb_RG_lZ,
+                 wW45: wW45,
+                 oKi1CmarKYyX__3?: oKi1CmarKYyX__3?,
+                 v4TaAxcr_6fCJ!: v4TaAxcr_6fCJ!,
+                 htR!: htR!,
+                 u79kDK9sk?: u79kDK9sk?,
+                 uwUWqKIRwFYXI!: uwUWqKIRwFYXI!,
+                 jROQmVEMbN_: jROQmVEMbN_,
+                 tsYK3ZYr: tsYK3ZYr,
+                 k_37pChYfnZ: k_37pChYfnZ,
+                 gu_uuIAyV7!: gu_uuIAyV7!
+               ]
 
-#       # Test that variables are rebound successfully:
-#       # ---------------------------------------------
+      # Test that variables are rebound successfully:
+      # ---------------------------------------------
 
-#       # 1) Rebind the variables
-#       ~k[qVzlQ?, d!, miZyQ1Dz1tZEbv, s4ICRlb8K!, b_iLzEIj_UUHof?, h_M_n5yBY74, dydBYfqTd!, vky?, i?, xcVGea?, dwPoUca_Wh, t8yBUdM] =
-#         [
-#           qVzlQ?: var1,
-#           d!: var2,
-#           miZyQ1Dz1tZEbv: var3,
-#           s4ICRlb8K!: var4,
-#           b_iLzEIj_UUHof?: var5,
-#           h_M_n5yBY74: var6,
-#           dydBYfqTd!: var7,
-#           vky?: var8,
-#           i?: var9,
-#           xcVGea?: var10,
-#           dwPoUca_Wh: var11,
-#           t8yBUdM: var12
-#         ]
+      # 1) Rebind the variables
+      ~k[nKo9DtVMD, gW_H__Fb_RG_lZ, wW45, oKi1CmarKYyX__3?, v4TaAxcr_6fCJ!, htR!, u79kDK9sk?, uwUWqKIRwFYXI!, jROQmVEMbN_, tsYK3ZYr, k_37pChYfnZ, gu_uuIAyV7!] =
+        [
+          nKo9DtVMD: var1,
+          gW_H__Fb_RG_lZ: var2,
+          wW45: var3,
+          oKi1CmarKYyX__3?: var4,
+          v4TaAxcr_6fCJ!: var5,
+          htR!: var6,
+          u79kDK9sk?: var7,
+          uwUWqKIRwFYXI!: var8,
+          jROQmVEMbN_: var9,
+          tsYK3ZYr: var10,
+          k_37pChYfnZ: var11,
+          gu_uuIAyV7!: var12
+        ]
 
-#       # 2) Assert that each variable has the correct value
-#       assert qVzlQ? == var1
-#       assert d! == var2
-#       assert miZyQ1Dz1tZEbv == var3
-#       assert s4ICRlb8K! == var4
-#       assert b_iLzEIj_UUHof? == var5
-#       assert h_M_n5yBY74 == var6
-#       assert dydBYfqTd! == var7
-#       assert vky? == var8
-#       assert i? == var9
-#       assert xcVGea? == var10
-#       assert dwPoUca_Wh == var11
-#       assert t8yBUdM == var12
-#     end
-#   end
-# end
+      # 2) Assert that each variable has the correct value
+      assert nKo9DtVMD == var1
+      assert gW_H__Fb_RG_lZ == var2
+      assert wW45 == var3
+      assert oKi1CmarKYyX__3? == var4
+      assert v4TaAxcr_6fCJ! == var5
+      assert htR! == var6
+      assert u79kDK9sk? == var7
+      assert uwUWqKIRwFYXI! == var8
+      assert jROQmVEMbN_ == var9
+      assert tsYK3ZYr == var10
+      assert k_37pChYfnZ == var11
+      assert gu_uuIAyV7! == var12
+    end
+  end
+end

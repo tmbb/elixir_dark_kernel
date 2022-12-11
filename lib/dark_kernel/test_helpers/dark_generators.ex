@@ -1,11 +1,25 @@
 defmodule DarkKernel.TestHelpers.DarkGenerators do
   @moduledoc false
 
+  # This module is officially a way to generate fake but valid
+  # elixir variable names so that we can generate some random
+  # test files for our library.
+  #
+  # Actually, it's an excuse to have fun with StreamData generators.
+  # Random generation is implemented with StreamData generators,
+  # which means that if we ever want to use these in ExUnit,
+  # they will shrink correctly!
+  #
+  # This means the code in this file is severely overengineered.
+
   alias StreamData
+  import DarkKernel
 
   def elixir_variable_name(options \\ []) do
-    min_length = Keyword.get(options, :min_length, 1)
-    max_length = Keyword.get(options, :max_length, 16)
+    # NOTE: This code is much shorter with DarkKernel
+    ~k[min_length: 1, max_length: 16 = options]
+
+    # Some simple parameter validation
 
     if min_length > max_length do
       raise ":min_length can't be smaller than max_length"
@@ -50,10 +64,12 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
   end
 
   def list_separator() do
+    # The whitespace before the comma can't contain newlines!
+    # That's an elixir syntax error
     string_as(
-      prefix: [chars: List.duplicate(?\s, 5) ++ [?\n], min_length: 0, max_length: 6, optional: true],
-      middle: [chars: [?,], size: 1],
-      suffix: [chars: List.duplicate(?\s, 5) ++ [?\n], min_length: 0, max_length: 6, optional: true],
+      prefix: [chars: [?\s], min_length: 0, max_length: 6, optional: true],
+      comma: [chars: [?,], size: 1],
+      suffix: [chars: List.duplicate(?\s, 5) ++ [?\n], min_length: 0, max_length: 6, optional: true]
     )
   end
 
@@ -80,18 +96,19 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
             {size, size}
 
           :error ->
-            min = Keyword.fetch!(data, :min_length)
-            max = Keyword.fetch!(data, :max_length)
-
-            {min, max}
+            ~k[!min_length, !max_length = data]
+            {min_length, max_length}
         end
       end
 
+    # Zip everything together so that we can map over
+    # all combinations of argument
     generator_arguments =
       outer_min_and_max_lengths
       |> Enum.zip(min_and_max_list_lengths)
       |> Enum.zip(range_sizes)
 
+    # TODO: explain this better
     list_of_generators =
       Enum.map(
         generator_arguments,
@@ -116,8 +133,8 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
             {_range, []} ->
               []
 
-            {range, [list_of_indices]} ->
-              Enum.map(list_of_indices, fn index -> char_at(range, index) end)
+            {ranges, [list_of_indices]} ->
+              Enum.map(list_of_indices, fn index -> char_at(ranges, index) end)
             end
           )
 
@@ -132,6 +149,10 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
     end
   end
 
+  # Evaluate the total length of a sequence of ranges and single characters
+  # This will be important when we want to select a random element from
+  # a sequence of ranges.
+
   defp total_length(ranges) do
     range_sizes =
       Enum.map(ranges, fn
@@ -141,6 +162,12 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
 
     Enum.sum(range_sizes)
   end
+
+  # Finds the character (or equivalently, the integer) in a given
+  # position inside a list of ranges.
+  #
+  # For large ranges, this is much more efficient than enumerating
+  # all values from all ranges.
 
   defp char_at(ranges, index) do
     check_bounds!(ranges, index)

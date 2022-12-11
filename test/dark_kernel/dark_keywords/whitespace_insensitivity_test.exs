@@ -1,184 +1,167 @@
-# defmodule DarkKernel.DarkKeywords.WhitespaceInsensitivityTest do
-#   use ExUnit.Case, async: true
-#   import ExUnitProperties
-#   import StreamData
+defmodule DarkKernel.DarkKeywords.WhitespaceInsensitivityTest do
+  use ExUnit.Case, async: true
+  import ExUnitProperties
+  import StreamData
 
-#   import DarkKernel
+  import DarkKernel
 
-#   # ----------------------------------------------
-#   # ~k[] lists are not whitespace sensitive
-#   # ----------------------------------------------
+  # ----------------------------------------------
+  # ~k[] lists are not whitespace sensitive
+  # ----------------------------------------------
 
-#   test "~k[] are whitespace insensitive, example #1: 2 variables" do
-#     check all qaLEAzb1s6jnx <- term(),
-#               hubgN <- term() do
-#       # Check for equality with different amounts of whitespace
-#       assert ~k[qaLEAzb1s6jnx, hubgN] == ~k[qaLEAzb1s6jnx, hubgN]
-#     end
-#   end
+  test "~k[] are whitespace insensitive, example #1: 2 variables" do
+    check all a_2nGD5R__wM0Fr <- term(),
+              hdlS6bNkWyIyLCzL <- term() do
+      # Check for equality with different amounts of whitespace
+      assert ~k[a_2nGD5R__wM0Fr, hdlS6bNkWyIyLCzL] == ~k[a_2nGD5R__wM0Fr,hdlS6bNkWyIyLCzL]
+    end
+  end
 
-#   test "~k[] are whitespace insensitive, example #2: 3 variables" do
-#     check all c6ba? <- term(),
-#               n1HIKznOBp_yN? <- term(),
-#               okrHD_F? <- term() do
-#       # Check for equality with different amounts of whitespace
-#       assert ~k[c6ba?, n1HIKznOBp_yN?, okrHD_F?] == ~k[c6ba? ,n1HIKznOBp_yN?,okrHD_F?  ]
-#     end
-#   end
+  test "~k[] are whitespace insensitive, example #2: 3 variables" do
+    check all xcZC_syIqIH? <- term(),
+              qeC_w2! <- term(),
+              goZiGE <- term() do
+      # Check for equality with different amounts of whitespace
+      assert ~k[xcZC_syIqIH?, qeC_w2!, goZiGE] == ~k[xcZC_syIqIH?,qeC_w2! ,goZiGE  ]
+    end
+  end
 
-#   test "~k[] are whitespace insensitive, example #3: 4 variables" do
-#     check all ngy_O6x_ <- term(),
-#               wQbztSX_ZOLhU <- term(),
-#               l_R5 <- term(),
-#               jDi? <- term() do
-#       # Check for equality with different amounts of whitespace
-#       assert ~k[ngy_O6x_, wQbztSX_ZOLhU, l_R5, jDi?] == ~k[ngy_O6x_,wQbztSX_ZOLhU
-# ,l_R5,jDi?
-# ]
-#     end
-#   end
+  test "~k[] are whitespace insensitive, example #3: 4 variables" do
+    check all v__864wz7qor? <- term(),
+              fIHGs8GOw1? <- term(),
+              je! <- term(),
+              fKQweh3w6nye! <- term() do
+      # Check for equality with different amounts of whitespace
+      assert ~k[v__864wz7qor?, fIHGs8GOw1?, je!, fKQweh3w6nye!] ==
+               ~k[v__864wz7qor?,fIHGs8GOw1?,je!,fKQweh3w6nye!]
+    end
+  end
 
-#   test "~k[] are whitespace insensitive, example #4: 5 variables" do
-#     check all tv0Y! <- term(),
-#               diy5w2UiM2 <- term(),
-#               dy_5 <- term(),
-#               y__fx0c <- term(),
-#               qXs <- term() do
-#       # Check for equality with different amounts of whitespace
-#       assert ~k[tv0Y!, diy5w2UiM2, dy_5, y__fx0c, qXs] ==
-#                ~k[tv0Y!,diy5w2UiM2,dy_5,y__fx0c    ,qXs ]
-#     end
-#   end
+  test "~k[] are whitespace insensitive, example #4: 5 variables" do
+    check all cgFynNm? <- term(),
+              z8_wGm <- term(),
+              dreceZlZMEe! <- term(),
+              mWP_G? <- term(),
+              bEN? <- term() do
+      # Check for equality with different amounts of whitespace
+      assert ~k[cgFynNm?, z8_wGm, dreceZlZMEe!, mWP_G?, bEN?] ==
+               ~k[cgFynNm?,z8_wGm,dreceZlZMEe!  ,mWP_G? ,bEN?]
+    end
+  end
 
-#   test "~k[] are whitespace insensitive, example #5: 6 variables" do
-#     check all qQw! <- term(),
-#               z? <- term(),
-#               ifU2XtHkQ? <- term(),
-#               s_wcoLXybj0JF_ <- term(),
-#               lC_WG_Js_qqnmC <- term(),
-#               aEy2tKEZ7nU__ <- term() do
-#       # Check for equality with different amounts of whitespace
-#       assert ~k[qQw!, z?, ifU2XtHkQ?, s_wcoLXybj0JF_, lC_WG_Js_qqnmC, aEy2tKEZ7nU__] ==
-#                ~k[qQw!, z? , ifU2XtHkQ?,s_wcoLXybj0JF_,   lC_WG_Js_qqnmC,aEy2tKEZ7nU__]
-#     end
-#   end
+  test "~k[] are whitespace insensitive, example #5: 6 variables" do
+    check all e9GP_60o <- term(),
+              xQVpizE <- term(),
+              s_tx <- term(),
+              aK_3_l2wG9t1? <- term(),
+              nvYh5_Ad_ <- term(),
+              k! <- term() do
+      # Check for equality with different amounts of whitespace
+      assert ~k[e9GP_60o, xQVpizE, s_tx, aK_3_l2wG9t1?, nvYh5_Ad_, k!] == ~k[e9GP_60o ,xQVpizE,
+s_tx,aK_3_l2wG9t1?,nvYh5_Ad_    ,k!  ]
+    end
+  end
 
-#   test "~k[] are whitespace insensitive, example #6: 7 variables" do
-#     check all pE <- term(),
-#               zg0 <- term(),
-#               doeaml_Hx! <- term(),
-#               c_f9s <- term(),
-#               d9 <- term(),
-#               qBS_0agKZ <- term(),
-#               uld_p <- term() do
-#       # Check for equality with different amounts of whitespace
-#       assert ~k[pE, zg0, doeaml_Hx!, c_f9s, d9, qBS_0agKZ, uld_p] == ~k[pE, zg0
-# , doeaml_Hx!,c_f9s,  d9,
-#   qBS_0agKZ,uld_p]
-#     end
-#   end
+  test "~k[] are whitespace insensitive, example #6: 7 variables" do
+    check all b? <- term(),
+              tbTqhBm_V? <- term(),
+              mp5yxxYW__f5WpM7 <- term(),
+              tft_h_t_rTLuOtR! <- term(),
+              fE_nc_xD_jT <- term(),
+              d? <- term(),
+              tCq_CBT7_E0p9BjR <- term() do
+      # Check for equality with different amounts of whitespace
+      assert ~k[b?, tbTqhBm_V?, mp5yxxYW__f5WpM7, tft_h_t_rTLuOtR!, fE_nc_xD_jT, d?, tCq_CBT7_E0p9BjR] ==
+               ~k[b?,tbTqhBm_V?,mp5yxxYW__f5WpM7,tft_h_t_rTLuOtR!   , fE_nc_xD_jT,  d?,      tCq_CBT7_E0p9BjR ]
+    end
+  end
 
-#   test "~k[] are whitespace insensitive, example #7: 8 variables" do
-#     check all q_t_ <- term(),
-#               lo1NQ_Sft7m_JC9_! <- term(),
-#               no2TcrdAjYBC3h__? <- term(),
-#               yAxAiYeSz! <- term(),
-#               aZgnBiyUnJA4ZQy_ <- term(),
-#               qHZw_p6xDH2rt32! <- term(),
-#               jMeYJAhh <- term(),
-#               y3? <- term() do
-#       # Check for equality with different amounts of whitespace
-#       assert ~k[q_t_, lo1NQ_Sft7m_JC9_!, no2TcrdAjYBC3h__?, yAxAiYeSz!, aZgnBiyUnJA4ZQy_, qHZw_p6xDH2rt32!, jMeYJAhh, y3?] ==
-#                ~k[q_t_ , lo1NQ_Sft7m_JC9_! ,  no2TcrdAjYBC3h__?,yAxAiYeSz!,aZgnBiyUnJA4ZQy_  ,qHZw_p6xDH2rt32! ,jMeYJAhh,y3?     ]
-#     end
-#   end
+  test "~k[] are whitespace insensitive, example #7: 8 variables" do
+    check all g <- term(),
+              f <- term(),
+              k <- term(),
+              t? <- term(),
+              xL_C! <- term(),
+              wP1 <- term(),
+              yE2o_ <- term(),
+              q? <- term() do
+      # Check for equality with different amounts of whitespace
+      assert ~k[g, f, k, t?, xL_C!, wP1, yE2o_, q?] == ~k[g, f, k,  
+t?  ,xL_C!,wP1   ,  yE2o_    ,     q?  ]
+    end
+  end
 
-#   test "~k[] are whitespace insensitive, example #8: 9 variables" do
-#     check all dfHThlTxyWOyH! <- term(),
-#               jM4LvA <- term(),
-#               p2! <- term(),
-#               mk_Mivn6jq! <- term(),
-#               a_XeDlWAA <- term(),
-#               qkD9e_S54xSta7? <- term(),
-#               n! <- term(),
-#               szsHux_E? <- term(),
-#               cpJI! <- term() do
-#       # Check for equality with different amounts of whitespace
-#       assert ~k[dfHThlTxyWOyH!, jM4LvA, p2!, mk_Mivn6jq!, a_XeDlWAA, qkD9e_S54xSta7?, n!, szsHux_E?, cpJI!] ==
-#                ~k[dfHThlTxyWOyH!
-# ,
-# jM4LvA,p2!   ,mk_Mivn6jq!,    a_XeDlWAA,qkD9e_S54xSta7?  ,n!
-# ,
+  test "~k[] are whitespace insensitive, example #8: 9 variables" do
+    check all b1JF <- term(),
+              gPtPde2VP! <- term(),
+              zoXmOrk <- term(),
+              zgI83IM_FIP_4l0 <- term(),
+              svl_Oz3iu7? <- term(),
+              f7R__vyW_Lv <- term(),
+              f_YWZGrCZev2R? <- term(),
+              o_Czxs? <- term(),
+              mhf_UW_2o34X <- term() do
+      # Check for equality with different amounts of whitespace
+      assert ~k[b1JF, gPtPde2VP!, zoXmOrk, zgI83IM_FIP_4l0, svl_Oz3iu7?, f7R__vyW_Lv, f_YWZGrCZev2R?, o_Czxs?, mhf_UW_2o34X] ==
+               ~k[b1JF, gPtPde2VP!, 
+zoXmOrk, zgI83IM_FIP_4l0,
+ svl_Oz3iu7?  ,f7R__vyW_Lv,f_YWZGrCZev2R?,  o_Czxs?,mhf_UW_2o34X ]
+    end
+  end
 
+  test "~k[] are whitespace insensitive, example #9: 10 variables" do
+    check all ogBLvI_sEW <- term(),
+              z! <- term(),
+              si4L <- term(),
+              leLwzZPKGLsqwR1t <- term(),
+              jE! <- term(),
+              e676m <- term(),
+              ul36_jyEk <- term(),
+              vah_pDzAy_OI_Q_ <- term(),
+              gaP1iT <- term(),
+              tv38sLLx3pA_st <- term() do
+      # Check for equality with different amounts of whitespace
+      assert ~k[ogBLvI_sEW, z!, si4L, leLwzZPKGLsqwR1t, jE!, e676m, ul36_jyEk, vah_pDzAy_OI_Q_, gaP1iT, tv38sLLx3pA_st] ==
+               ~k[ogBLvI_sEW,z!,si4L,  leLwzZPKGLsqwR1t    ,jE!,e676m,ul36_jyEk,vah_pDzAy_OI_Q_ ,gaP1iT,tv38sLLx3pA_st]
+    end
+  end
 
-# szsHux_E? ,cpJI!]
-#     end
-#   end
+  test "~k[] are whitespace insensitive, example #10: 11 variables" do
+    check all jlMR! <- term(),
+              xSbCL <- term(),
+              nR9z56! <- term(),
+              lwuHr? <- term(),
+              g2! <- term(),
+              lZM5! <- term(),
+              gHH <- term(),
+              j_cgA <- term(),
+              gbCl <- term(),
+              jZO <- term(),
+              hqXeoOI! <- term() do
+      # Check for equality with different amounts of whitespace
+      assert ~k[jlMR!, xSbCL, nR9z56!, lwuHr?, g2!, lZM5!, gHH, j_cgA, gbCl, jZO, hqXeoOI!] ==
+               ~k[jlMR!,xSbCL,nR9z56!, lwuHr? ,g2!   , 
+ lZM5!    ,gHH,j_cgA,gbCl,    jZO,hqXeoOI!]
+    end
+  end
 
-#   test "~k[] are whitespace insensitive, example #9: 10 variables" do
-#     check all e_! <- term(),
-#               vFmSD__X! <- term(),
-#               c4_Sr_eE_nK? <- term(),
-#               hU <- term(),
-#               uxDmTShmGTOpWP3q <- term(),
-#               jaE_xfR3e! <- term(),
-#               g4NUK_GK_YFK! <- term(),
-#               jrqrpw_dvqbqC_ <- term(),
-#               gg? <- term(),
-#               z0EakQ <- term() do
-#       # Check for equality with different amounts of whitespace
-#       assert ~k[e_!, vFmSD__X!, c4_Sr_eE_nK?, hU, uxDmTShmGTOpWP3q, jaE_xfR3e!, g4NUK_GK_YFK!, jrqrpw_dvqbqC_, gg?, z0EakQ] ==
-#                ~k[e_! , vFmSD__X!,c4_Sr_eE_nK?
-#  ,hU ,   uxDmTShmGTOpWP3q,
-# jaE_xfR3e!  ,
-#     g4NUK_GK_YFK!,jrqrpw_dvqbqC_,gg?,
-# z0EakQ]
-#     end
-#   end
-
-#   test "~k[] are whitespace insensitive, example #10: 11 variables" do
-#     check all fPsKc_QkEUR2c! <- term(),
-#               p4Y! <- term(),
-#               o6uV! <- term(),
-#               yapBk7_t5mDB__! <- term(),
-#               aZ_VOZmZ <- term(),
-#               sKRChp6NQYmY <- term(),
-#               lw! <- term(),
-#               yLf_jRCPT <- term(),
-#               wjqkjX_9XK_YK <- term(),
-#               e <- term(),
-#               ahYgrQ_uh <- term() do
-#       # Check for equality with different amounts of whitespace
-#       assert ~k[fPsKc_QkEUR2c!, p4Y!, o6uV!, yapBk7_t5mDB__!, aZ_VOZmZ, sKRChp6NQYmY, lw!, yLf_jRCPT, wjqkjX_9XK_YK, e, ahYgrQ_uh] ==
-#                ~k[fPsKc_QkEUR2c! ,p4Y!, o6uV!,yapBk7_t5mDB__!,aZ_VOZmZ,sKRChp6NQYmY   ,
-# lw!
-#    ,
-# yLf_jRCPT,   wjqkjX_9XK_YK,    e,    ahYgrQ_uh    ]
-#     end
-#   end
-
-#   test "~k[] are whitespace insensitive, example #11: 12 variables" do
-#     check all ko2ke_BE4psdw2 <- term(),
-#               mGe? <- term(),
-#               pDpL! <- term(),
-#               kfbYC2esS <- term(),
-#               lrcVsmm_uR4_dUry <- term(),
-#               usfGB04? <- term(),
-#               j <- term(),
-#               xjBQMs <- term(),
-#               bB? <- term(),
-#               vrr_bDtYbBizAPx <- term(),
-#               sgsW5_wDdcknC <- term(),
-#               e3Z_Qb95pybh? <- term() do
-#       # Check for equality with different amounts of whitespace
-#       assert ~k[ko2ke_BE4psdw2, mGe?, pDpL!, kfbYC2esS, lrcVsmm_uR4_dUry, usfGB04?, j, xjBQMs, bB?, vrr_bDtYbBizAPx, sgsW5_wDdcknC, e3Z_Qb95pybh?] ==
-#                ~k[ko2ke_BE4psdw2,mGe?,  pDpL!,kfbYC2esS,lrcVsmm_uR4_dUry,usfGB04?
-
-
-# ,j,  xjBQMs,bB?,      vrr_bDtYbBizAPx
-
-# , sgsW5_wDdcknC,
-#  e3Z_Qb95pybh?]
-#     end
-#   end
-# end
+  test "~k[] are whitespace insensitive, example #11: 12 variables" do
+    check all rZ1B8m6 <- term(),
+              eCVI! <- term(),
+              pgVl_Iv <- term(),
+              ra <- term(),
+              y60! <- term(),
+              pl <- term(),
+              a8? <- term(),
+              cc8TB <- term(),
+              kMtezibanNf! <- term(),
+              kYr_3su? <- term(),
+              oVh_yICE_nk <- term(),
+              eCzJZ! <- term() do
+      # Check for equality with different amounts of whitespace
+      assert ~k[rZ1B8m6, eCVI!, pgVl_Iv, ra, y60!, pl, a8?, cc8TB, kMtezibanNf!, kYr_3su?, oVh_yICE_nk, eCzJZ!] ==
+               ~k[rZ1B8m6, eCVI!  , pgVl_Iv,  ra,y60!,  pl,a8?,cc8TB,kMtezibanNf! ,kYr_3su?,oVh_yICE_nk, 
+ eCzJZ!]
+    end
+  end
+end
