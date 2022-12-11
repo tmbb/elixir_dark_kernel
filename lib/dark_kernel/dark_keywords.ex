@@ -43,12 +43,12 @@ defmodule DarkKernel.DarkKeywords do
     {assignment?, normalized_list, assigned_to} =
       case last do
         # ~k[a, b, c = opts]
-        {:=, _meta, [left, right]} ->
+        {op, _meta, [left, right]} when op in [:=, :<-] ->
           list = List.delete_at(quoted, -1) ++ [left]
           {true, normalize_list(list), {:ok, right}}
 
         # ~k[a, b, c: default = opts]
-        {key, {:=, _meta, [left, right]}} when is_atom(key) ->
+        {key, {op, _meta, [left, right]}} when is_atom(key) and op in [:=, :<-] ->
           list = List.delete_at(quoted, -1) ++ [{key, left}]
           {true, normalize_list(list), {:ok, right}}
 

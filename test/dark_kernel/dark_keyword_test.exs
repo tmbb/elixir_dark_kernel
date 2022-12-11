@@ -30,6 +30,16 @@ defmodule DarkKernel.DarkKeywordTest do
     assert Keyword.keys(~k[a, b = opts]) != [:a, :b, :c]
   end
 
+  test "~k[] match expressions support both `<-` and `=`" do
+    opts = [a: 1, b: 2, c: 3]
+
+    assert Keyword.keys(~k[a, b <- opts]) == [:a, :b]
+    assert Keyword.keys(~k[a, b <- opts]) != [:a, :b, :c]
+
+    assert Keyword.keys(~k[a, b = opts]) == [:a, :b]
+    assert Keyword.keys(~k[a, b = opts]) != [:a, :b, :c]
+  end
+
   test "~k[] match expressions return the matched keys in the correct order" do
     opts = [a: 1, b: 2, c: 3]
     assert Keyword.keys(~k[b, a, c = opts]) == [:b, :a, :c]
