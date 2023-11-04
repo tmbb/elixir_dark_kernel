@@ -17,7 +17,7 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
 
   def elixir_variable_name(options \\ []) do
     # NOTE: This code is much shorter with DarkKernel
-    ~k[min_length: 1, max_length: 16 = options]
+    ~k[min_length: 1, max_length: 16] <~ options
 
     # Some simple parameter validation
 
@@ -96,7 +96,7 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
             {size, size}
 
           :error ->
-            ~k[!min_length, !max_length = data]
+            ~k[!min_length, !max_length] <~ data
             {min_length, max_length}
         end
       end

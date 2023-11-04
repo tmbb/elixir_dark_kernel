@@ -86,7 +86,7 @@ s_tx,aK_3_l2wG9t1?,nvYh5_Ad_    ,k!  ]
               yE2o_ <- term(),
               q? <- term() do
       # Check for equality with different amounts of whitespace
-      assert ~k[g, f, k, t?, xL_C!, wP1, yE2o_, q?] == ~k[g, f, k,  
+      assert ~k[g, f, k, t?, xL_C!, wP1, yE2o_, q?] == ~k[g, f, k,
 t?  ,xL_C!,wP1   ,  yE2o_    ,     q?  ]
     end
   end
@@ -103,7 +103,7 @@ t?  ,xL_C!,wP1   ,  yE2o_    ,     q?  ]
               mhf_UW_2o34X <- term() do
       # Check for equality with different amounts of whitespace
       assert ~k[b1JF, gPtPde2VP!, zoXmOrk, zgI83IM_FIP_4l0, svl_Oz3iu7?, f7R__vyW_Lv, f_YWZGrCZev2R?, o_Czxs?, mhf_UW_2o34X] ==
-               ~k[b1JF, gPtPde2VP!, 
+               ~k[b1JF, gPtPde2VP!,
 zoXmOrk, zgI83IM_FIP_4l0,
  svl_Oz3iu7?  ,f7R__vyW_Lv,f_YWZGrCZev2R?,  o_Czxs?,mhf_UW_2o34X ]
     end
@@ -140,7 +140,7 @@ zoXmOrk, zgI83IM_FIP_4l0,
               hqXeoOI! <- term() do
       # Check for equality with different amounts of whitespace
       assert ~k[jlMR!, xSbCL, nR9z56!, lwuHr?, g2!, lZM5!, gHH, j_cgA, gbCl, jZO, hqXeoOI!] ==
-               ~k[jlMR!,xSbCL,nR9z56!, lwuHr? ,g2!   , 
+               ~k[jlMR!,xSbCL,nR9z56!, lwuHr? ,g2!   ,
  lZM5!    ,gHH,j_cgA,gbCl,    jZO,hqXeoOI!]
     end
   end
@@ -160,7 +160,7 @@ zoXmOrk, zgI83IM_FIP_4l0,
               eCzJZ! <- term() do
       # Check for equality with different amounts of whitespace
       assert ~k[rZ1B8m6, eCVI!, pgVl_Iv, ra, y60!, pl, a8?, cc8TB, kMtezibanNf!, kYr_3su?, oVh_yICE_nk, eCzJZ!] ==
-               ~k[rZ1B8m6, eCVI!  , pgVl_Iv,  ra,y60!,  pl,a8?,cc8TB,kMtezibanNf! ,kYr_3su?,oVh_yICE_nk, 
+               ~k[rZ1B8m6, eCVI!  , pgVl_Iv,  ra,y60!,  pl,a8?,cc8TB,kMtezibanNf! ,kYr_3su?,oVh_yICE_nk,
  eCzJZ!]
     end
   end

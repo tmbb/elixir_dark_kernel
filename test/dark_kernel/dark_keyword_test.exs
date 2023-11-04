@@ -26,30 +26,27 @@ defmodule DarkKernel.DarkKeywordTest do
 
   test "~k[] match expressions return only the matched keys and values" do
     opts = [a: 1, b: 2, c: 3]
-    assert Keyword.keys(~k[a, b = opts]) == [:a, :b]
-    assert Keyword.keys(~k[a, b = opts]) != [:a, :b, :c]
+    assert Keyword.keys(~k[a, b] <~ opts) == [:a, :b]
+    assert Keyword.keys(~k[a, b] <~ opts) != [:a, :b, :c]
   end
 
   test "~k[] match expressions support both `<-` and `=`" do
     opts = [a: 1, b: 2, c: 3]
 
-    assert Keyword.keys(~k[a, b <- opts]) == [:a, :b]
-    assert Keyword.keys(~k[a, b <- opts]) != [:a, :b, :c]
-
-    assert Keyword.keys(~k[a, b = opts]) == [:a, :b]
-    assert Keyword.keys(~k[a, b = opts]) != [:a, :b, :c]
+    assert Keyword.keys(~k[a, b] <~ opts) == [:a, :b]
+    assert Keyword.keys(~k[a, b] <~ opts) != [:a, :b, :c]
   end
 
   test "~k[] match expressions return the matched keys in the correct order" do
     opts = [a: 1, b: 2, c: 3]
-    assert Keyword.keys(~k[b, a, c = opts]) == [:b, :a, :c]
-    assert Keyword.keys(~k[b, a, c = opts]) != [:a, :b, :c]
+    assert Keyword.keys(~k[b, a, c] <~ opts) == [:b, :a, :c]
+    assert Keyword.keys(~k[b, a, c] <~ opts) != [:a, :b, :c]
   end
 
   test "~k[] match expressions assign variables to nil when appropriate" do
     opts = [a: "A", b: "B", c: "C"]
 
-    ~k[a, b, c, d = opts]
+    ~k[a, b, c, d] <~ opts
 
     assert a == "A"
     assert b == "B"
@@ -59,13 +56,13 @@ defmodule DarkKernel.DarkKeywordTest do
 
   test "~k[] match expression: bang (!) gives the same result - 1" do
     opts = [a: "A", b: "B", c: "C"]
-    assert ~k[a, b, c = opts] ==  ~k[!a, !b, !c = opts]
+    assert (~k[a, b, c] <~ opts) ==  (~k[!a, !b, !c] <~ opts)
   end
 
   test "~k[] match expression: bang (!) gives the same result - 2" do
     opts = [a: "A", b: "B", c: "C"]
 
-    ~k[!a, !b, !c = opts]
+    ~k[!a, !b, !c] <~ opts
 
     assert a == "A"
     assert b == "B"
@@ -75,8 +72,8 @@ defmodule DarkKernel.DarkKeywordTest do
   test "~k[] match expression with default values: integer constant" do
     opts = [a: "A"]
 
-    ~k[!a, b: 1 = opts]
-    ~k[c: 2 = opts]
+    ~k[!a, b: 1] <~ opts
+    ~k[c: 2] <~ opts
 
     assert a == "A"
     assert b == 1
@@ -86,8 +83,8 @@ defmodule DarkKernel.DarkKeywordTest do
   test "~k[] match expression with default values: float constant" do
     opts = [a: "A"]
 
-    ~k[!a, b: 2.78 = opts]
-    ~k[c: 3.14 = opts]
+    ~k[!a, b: 2.78] <~ opts
+    ~k[c: 3.14] <~ opts
 
     assert a == "A"
     assert b == 2.78
@@ -97,8 +94,8 @@ defmodule DarkKernel.DarkKeywordTest do
   test "~k[] match expression with default values: string constant" do
     opts = [a: "A"]
 
-    ~k[!a, b: "a string" = opts]
-    ~k[c: "another string" = opts]
+    ~k[!a, b: "a string"] <~ opts
+    ~k[c: "another string"] <~ opts
 
     assert a == "A"
     assert b == "a string"
@@ -108,8 +105,8 @@ defmodule DarkKernel.DarkKeywordTest do
   test "~k[] match expression with default values: charlist constant" do
     opts = [a: "A"]
 
-    ~k[!a, b: 'a charlist' = opts]
-    ~k[c: 'another charlist' = opts]
+    ~k[!a, b: 'a charlist'] <~ opts
+    ~k[c: 'another charlist'] <~ opts
 
     assert a == "A"
     assert b == 'a charlist'
@@ -119,8 +116,8 @@ defmodule DarkKernel.DarkKeywordTest do
   test "~k[] match expression with default values: date and time sigils" do
     opts = [a: "A"]
 
-    ~k[!a, b: ~D{2022-10-12} = opts]
-    ~k[c: ~T{10:00:00} = opts]
+    ~k[!a, b: ~D{2022-10-12}] <~ opts
+    ~k[c: ~T{10:00:00}] <~ opts
 
     assert a == "A"
     assert b == ~D[2022-10-12]
@@ -130,8 +127,8 @@ defmodule DarkKernel.DarkKeywordTest do
   test "~k[] match expression with default values: functions" do
     opts = [a: "A"]
 
-    ~k[!a, b: :rand.uniform() = opts]
-    ~k[c: :rand.uniform() = opts]
+    ~k[!a, b: :rand.uniform()] <~ opts
+    ~k[c: :rand.uniform()] <~ opts
 
     assert a == "A"
     assert is_float(b)
@@ -142,8 +139,8 @@ defmodule DarkKernel.DarkKeywordTest do
   test "~k[] match expression with default values: arithmetic expressions" do
     opts = [a: "A"]
 
-    ~k[!a, b: 1 + 2 = opts]
-    ~k[c: 5 + :rand.uniform() = opts]
+    ~k[!a, b: 1 + 2] <~ opts
+    ~k[c: 5 + :rand.uniform()] <~ opts
 
     assert a == "A"
     assert b == 3
@@ -151,24 +148,11 @@ defmodule DarkKernel.DarkKeywordTest do
     assert b != c
   end
 
-  @tag skip: true
-  test "~k[] match expression can't contain two equals signs" do
-    code_that_does_not_compile =
-      quote do
-        opts = [a: "A"]
-        ~k[!a, b: (_ = 1 + 2) = opts]
-      end
-
-    assert_raise SyntaxError, fn ->
-      Code.compile_quoted(code_that_does_not_compile)
-    end
-  end
-
   test "~k[] bang keywords can't have defaults" do
     code_that_does_not_compile =
       quote do
         opts = [a: "A", b: "B"]
-        ~k[a, b, !c: 1 = opts]
+        ~k[a, b, !c: 1] <~ opts
       end
 
     assert_raise SyntaxError, fn ->

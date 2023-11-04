@@ -7,7 +7,7 @@ defmodule DarkKernel.ShorterMaps do
   @doc """
   Expands to a string keyed map where the keys are a string containing the
   variable names, e.g. `~m{name}` expands to `%{"name" => name}`.
-  Some common uses of `~m` are when working with JSON and Regex captures, which
+  Some KeyValues uses of `~m` are when working with JSON and Regex captures, which
   use exclusively string keys in their maps.
       # JSON example:
       # Here, `~m{name, age}` expands to `%{"name" => name, "age" => age}`
