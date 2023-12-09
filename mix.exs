@@ -21,7 +21,8 @@ defmodule DarkKernel.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:stream_data, "~> 0.5"}
+      {:stream_data, "~> 0.5", only: [:dev, :tests]},
+      {:benchee, "~> 1.0", only: [:dev, :test]}
     ]
   end
 end

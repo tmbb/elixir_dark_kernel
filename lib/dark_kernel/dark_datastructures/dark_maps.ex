@@ -8,7 +8,8 @@ defmodule DarkKernel.DarkDatastructures.DarkMaps do
   @map_fetcher {Map, :fetch!}
 
   def do_sigil_m_assignment(text_ast, modifiers, rhs, env) do
-    {tilde_m_text, lhs} = KeyValues.extract_and_parse_tilde_text!("~m{}", text_ast, modifiers, env)
+    {tilde_m_text, lhs} =
+      KeyValues.extract_and_parse_tilde_text!("~m{}", text_ast, modifiers, env)
 
     converter = fn kw_list -> {:%{}, [], kw_list} end
     key_converter = fn atom -> Atom.to_string(atom) end
@@ -29,7 +30,8 @@ defmodule DarkKernel.DarkDatastructures.DarkMaps do
   end
 
   def do_sigil_m(text_ast, modifiers, env) do
-    {tilde_m_text, quoted} = KeyValues.extract_and_parse_tilde_text!("~m{}", text_ast, modifiers, env)
+    {tilde_m_text, quoted} =
+      KeyValues.extract_and_parse_tilde_text!("~m{}", text_ast, modifiers, env)
 
     normalized_list = KeyValues.normalize_list(quoted)
 
@@ -51,7 +53,8 @@ defmodule DarkKernel.DarkDatastructures.DarkMaps do
   end
 
   def do_sigil_M_assignment(text_ast, modifiers, rhs, env) do
-    {tilde_m_text, lhs} = KeyValues.extract_and_parse_tilde_text!("~M{}", text_ast, modifiers, env)
+    {tilde_m_text, lhs} =
+      KeyValues.extract_and_parse_tilde_text!("~M{}", text_ast, modifiers, env)
 
     converter = fn kw_list -> {:%{}, [], kw_list} end
     key_converter = fn atom -> atom end
@@ -72,7 +75,8 @@ defmodule DarkKernel.DarkDatastructures.DarkMaps do
   end
 
   def do_sigil_M(text_ast, modifiers, env) do
-    {tilde_m_text, quoted} = KeyValues.extract_and_parse_tilde_text!("~M{}", text_ast, modifiers, env)
+    {tilde_m_text, quoted} =
+      KeyValues.extract_and_parse_tilde_text!("~M{}", text_ast, modifiers, env)
 
     normalized_list = KeyValues.normalize_list(quoted)
 

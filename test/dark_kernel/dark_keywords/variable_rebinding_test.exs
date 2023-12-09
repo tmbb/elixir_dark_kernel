@@ -6,10 +6,12 @@ defmodule DarkKernel.DarkKeywords.VariableRebindingTest do
   import DarkKernel
 
   test "variable rebinding, example #1: 2 variables" do
-    check all h7XiwEQkybhxj! <- term(),
-              i <- term(),
-              var1 <- term(),
-              var2 <- term() do
+    check all(
+            h7XiwEQkybhxj! <- term(),
+            i <- term(),
+            var1 <- term(),
+            var2 <- term()
+          ) do
       # Keyword lists built with ~k[] have the value we expect:
       # -------------------------------------------------------
       assert ~k[h7XiwEQkybhxj!, i] == [h7XiwEQkybhxj!: h7XiwEQkybhxj!, i: i]
@@ -27,12 +29,14 @@ defmodule DarkKernel.DarkKeywords.VariableRebindingTest do
   end
 
   test "variable rebinding, example #2: 3 variables" do
-    check all q? <- term(),
-              y_fW9_xZO <- term(),
-              iSg <- term(),
-              var1 <- term(),
-              var2 <- term(),
-              var3 <- term() do
+    check all(
+            q? <- term(),
+            y_fW9_xZO <- term(),
+            iSg <- term(),
+            var1 <- term(),
+            var2 <- term(),
+            var3 <- term()
+          ) do
       # Keyword lists built with ~k[] have the value we expect:
       # -------------------------------------------------------
       assert ~k[q?, y_fW9_xZO, iSg] == [q?: q?, y_fW9_xZO: y_fW9_xZO, iSg: iSg]
@@ -51,14 +55,16 @@ defmodule DarkKernel.DarkKeywords.VariableRebindingTest do
   end
 
   test "variable rebinding, example #3: 4 variables" do
-    check all v2RUamIB <- term(),
-              yf_yFpbZa? <- term(),
-              lCW1AaoK3BsOPPWT <- term(),
-              v_CiMahqeh? <- term(),
-              var1 <- term(),
-              var2 <- term(),
-              var3 <- term(),
-              var4 <- term() do
+    check all(
+            v2RUamIB <- term(),
+            yf_yFpbZa? <- term(),
+            lCW1AaoK3BsOPPWT <- term(),
+            v_CiMahqeh? <- term(),
+            var1 <- term(),
+            var2 <- term(),
+            var3 <- term(),
+            var4 <- term()
+          ) do
       # Keyword lists built with ~k[] have the value we expect:
       # -------------------------------------------------------
       assert ~k[v2RUamIB, yf_yFpbZa?, lCW1AaoK3BsOPPWT, v_CiMahqeh?] == [
@@ -88,16 +94,18 @@ defmodule DarkKernel.DarkKeywords.VariableRebindingTest do
   end
 
   test "variable rebinding, example #4: 5 variables" do
-    check all vJ_6tXr? <- term(),
-              h! <- term(),
-              kiA33z_0R6 <- term(),
-              de <- term(),
-              xqgw! <- term(),
-              var1 <- term(),
-              var2 <- term(),
-              var3 <- term(),
-              var4 <- term(),
-              var5 <- term() do
+    check all(
+            vJ_6tXr? <- term(),
+            h! <- term(),
+            kiA33z_0R6 <- term(),
+            de <- term(),
+            xqgw! <- term(),
+            var1 <- term(),
+            var2 <- term(),
+            var3 <- term(),
+            var4 <- term(),
+            var5 <- term()
+          ) do
       # Keyword lists built with ~k[] have the value we expect:
       # -------------------------------------------------------
       assert ~k[vJ_6tXr?, h!, kiA33z_0R6, de, xqgw!] == [
@@ -130,18 +138,20 @@ defmodule DarkKernel.DarkKeywords.VariableRebindingTest do
   end
 
   test "variable rebinding, example #5: 6 variables" do
-    check all ya <- term(),
-              pC2o! <- term(),
-              zE <- term(),
-              p_Q? <- term(),
-              uGLX? <- term(),
-              t? <- term(),
-              var1 <- term(),
-              var2 <- term(),
-              var3 <- term(),
-              var4 <- term(),
-              var5 <- term(),
-              var6 <- term() do
+    check all(
+            ya <- term(),
+            pC2o! <- term(),
+            zE <- term(),
+            p_Q? <- term(),
+            uGLX? <- term(),
+            t? <- term(),
+            var1 <- term(),
+            var2 <- term(),
+            var3 <- term(),
+            var4 <- term(),
+            var5 <- term(),
+            var6 <- term()
+          ) do
       # Keyword lists built with ~k[] have the value we expect:
       # -------------------------------------------------------
       assert ~k[ya, pC2o!, zE, p_Q?, uGLX?, t?] == [
@@ -177,20 +187,22 @@ defmodule DarkKernel.DarkKeywords.VariableRebindingTest do
   end
 
   test "variable rebinding, example #6: 7 variables" do
-    check all emmuvDkRG__! <- term(),
-              iXp6FDfec_G <- term(),
-              mFB <- term(),
-              cs <- term(),
-              wC9s? <- term(),
-              n5AEjWJ0CM9? <- term(),
-              o_wrp8nr9hHzw_! <- term(),
-              var1 <- term(),
-              var2 <- term(),
-              var3 <- term(),
-              var4 <- term(),
-              var5 <- term(),
-              var6 <- term(),
-              var7 <- term() do
+    check all(
+            emmuvDkRG__! <- term(),
+            iXp6FDfec_G <- term(),
+            mFB <- term(),
+            cs <- term(),
+            wC9s? <- term(),
+            n5AEjWJ0CM9? <- term(),
+            o_wrp8nr9hHzw_! <- term(),
+            var1 <- term(),
+            var2 <- term(),
+            var3 <- term(),
+            var4 <- term(),
+            var5 <- term(),
+            var6 <- term(),
+            var7 <- term()
+          ) do
       # Keyword lists built with ~k[] have the value we expect:
       # -------------------------------------------------------
       assert ~k[emmuvDkRG__!, iXp6FDfec_G, mFB, cs, wC9s?, n5AEjWJ0CM9?, o_wrp8nr9hHzw_!] == [
@@ -229,22 +241,24 @@ defmodule DarkKernel.DarkKeywords.VariableRebindingTest do
   end
 
   test "variable rebinding, example #7: 8 variables" do
-    check all aGrLji1iNn? <- term(),
-              d0dSyO9Gh__PFw6? <- term(),
-              t_ru_WjdCmc <- term(),
-              d <- term(),
-              bXVVrTn_d <- term(),
-              tICP0_mN969Ap! <- term(),
-              e8iKepRIS__AXSc? <- term(),
-              g0uQEChDL__7v! <- term(),
-              var1 <- term(),
-              var2 <- term(),
-              var3 <- term(),
-              var4 <- term(),
-              var5 <- term(),
-              var6 <- term(),
-              var7 <- term(),
-              var8 <- term() do
+    check all(
+            aGrLji1iNn? <- term(),
+            d0dSyO9Gh__PFw6? <- term(),
+            t_ru_WjdCmc <- term(),
+            d <- term(),
+            bXVVrTn_d <- term(),
+            tICP0_mN969Ap! <- term(),
+            e8iKepRIS__AXSc? <- term(),
+            g0uQEChDL__7v! <- term(),
+            var1 <- term(),
+            var2 <- term(),
+            var3 <- term(),
+            var4 <- term(),
+            var5 <- term(),
+            var6 <- term(),
+            var7 <- term(),
+            var8 <- term()
+          ) do
       # Keyword lists built with ~k[] have the value we expect:
       # -------------------------------------------------------
       assert ~k[aGrLji1iNn?, d0dSyO9Gh__PFw6?, t_ru_WjdCmc, d, bXVVrTn_d, tICP0_mN969Ap!, e8iKepRIS__AXSc?, g0uQEChDL__7v!] ==
@@ -288,24 +302,26 @@ defmodule DarkKernel.DarkKeywords.VariableRebindingTest do
   end
 
   test "variable rebinding, example #8: 9 variables" do
-    check all ot__s_o3x? <- term(),
-              de? <- term(),
-              l1_9n6uM! <- term(),
-              hk_8eZ! <- term(),
-              f <- term(),
-              hq90oRL5_w4W28O! <- term(),
-              lgdSYM2iv <- term(),
-              pDprsTcaQWfncAz? <- term(),
-              a0VBPRsPaVU_p <- term(),
-              var1 <- term(),
-              var2 <- term(),
-              var3 <- term(),
-              var4 <- term(),
-              var5 <- term(),
-              var6 <- term(),
-              var7 <- term(),
-              var8 <- term(),
-              var9 <- term() do
+    check all(
+            ot__s_o3x? <- term(),
+            de? <- term(),
+            l1_9n6uM! <- term(),
+            hk_8eZ! <- term(),
+            f <- term(),
+            hq90oRL5_w4W28O! <- term(),
+            lgdSYM2iv <- term(),
+            pDprsTcaQWfncAz? <- term(),
+            a0VBPRsPaVU_p <- term(),
+            var1 <- term(),
+            var2 <- term(),
+            var3 <- term(),
+            var4 <- term(),
+            var5 <- term(),
+            var6 <- term(),
+            var7 <- term(),
+            var8 <- term(),
+            var9 <- term()
+          ) do
       # Keyword lists built with ~k[] have the value we expect:
       # -------------------------------------------------------
       assert ~k[ot__s_o3x?, de?, l1_9n6uM!, hk_8eZ!, f, hq90oRL5_w4W28O!, lgdSYM2iv, pDprsTcaQWfncAz?, a0VBPRsPaVU_p] ==
@@ -352,26 +368,28 @@ defmodule DarkKernel.DarkKeywords.VariableRebindingTest do
   end
 
   test "variable rebinding, example #9: 10 variables" do
-    check all ezw5gpmLFnq5C? <- term(),
-              tlZpvD5ALl? <- term(),
-              eY00e_lH? <- term(),
-              q749hO? <- term(),
-              tQAj_f9pMy9_ <- term(),
-              t_r_aTI_TKMY_b <- term(),
-              aY <- term(),
-              tE <- term(),
-              k4D_r4bF_3lI_ <- term(),
-              obUQ_ <- term(),
-              var1 <- term(),
-              var2 <- term(),
-              var3 <- term(),
-              var4 <- term(),
-              var5 <- term(),
-              var6 <- term(),
-              var7 <- term(),
-              var8 <- term(),
-              var9 <- term(),
-              var10 <- term() do
+    check all(
+            ezw5gpmLFnq5C? <- term(),
+            tlZpvD5ALl? <- term(),
+            eY00e_lH? <- term(),
+            q749hO? <- term(),
+            tQAj_f9pMy9_ <- term(),
+            t_r_aTI_TKMY_b <- term(),
+            aY <- term(),
+            tE <- term(),
+            k4D_r4bF_3lI_ <- term(),
+            obUQ_ <- term(),
+            var1 <- term(),
+            var2 <- term(),
+            var3 <- term(),
+            var4 <- term(),
+            var5 <- term(),
+            var6 <- term(),
+            var7 <- term(),
+            var8 <- term(),
+            var9 <- term(),
+            var10 <- term()
+          ) do
       # Keyword lists built with ~k[] have the value we expect:
       # -------------------------------------------------------
       assert ~k[ezw5gpmLFnq5C?, tlZpvD5ALl?, eY00e_lH?, q749hO?, tQAj_f9pMy9_, t_r_aTI_TKMY_b, aY, tE, k4D_r4bF_3lI_, obUQ_] ==
@@ -421,28 +439,30 @@ defmodule DarkKernel.DarkKeywords.VariableRebindingTest do
   end
 
   test "variable rebinding, example #10: 11 variables" do
-    check all hgY0Q_Ii? <- term(),
-              t <- term(),
-              cr_4fWwW_ClEOA <- term(),
-              kQG7coZL9gy? <- term(),
-              fXkVzohNOF06mc71? <- term(),
-              i2! <- term(),
-              nToc <- term(),
-              krYhVSLjTnFIR? <- term(),
-              fIOEDh2! <- term(),
-              rPisYozw_s5mH <- term(),
-              plw_e4PsE9s_I21i <- term(),
-              var1 <- term(),
-              var2 <- term(),
-              var3 <- term(),
-              var4 <- term(),
-              var5 <- term(),
-              var6 <- term(),
-              var7 <- term(),
-              var8 <- term(),
-              var9 <- term(),
-              var10 <- term(),
-              var11 <- term() do
+    check all(
+            hgY0Q_Ii? <- term(),
+            t <- term(),
+            cr_4fWwW_ClEOA <- term(),
+            kQG7coZL9gy? <- term(),
+            fXkVzohNOF06mc71? <- term(),
+            i2! <- term(),
+            nToc <- term(),
+            krYhVSLjTnFIR? <- term(),
+            fIOEDh2! <- term(),
+            rPisYozw_s5mH <- term(),
+            plw_e4PsE9s_I21i <- term(),
+            var1 <- term(),
+            var2 <- term(),
+            var3 <- term(),
+            var4 <- term(),
+            var5 <- term(),
+            var6 <- term(),
+            var7 <- term(),
+            var8 <- term(),
+            var9 <- term(),
+            var10 <- term(),
+            var11 <- term()
+          ) do
       # Keyword lists built with ~k[] have the value we expect:
       # -------------------------------------------------------
       assert ~k[hgY0Q_Ii?, t, cr_4fWwW_ClEOA, kQG7coZL9gy?, fXkVzohNOF06mc71?, i2!, nToc, krYhVSLjTnFIR?, fIOEDh2!, rPisYozw_s5mH, plw_e4PsE9s_I21i] ==
@@ -495,30 +515,32 @@ defmodule DarkKernel.DarkKeywords.VariableRebindingTest do
   end
 
   test "variable rebinding, example #11: 12 variables" do
-    check all nKo9DtVMD <- term(),
-              gW_H__Fb_RG_lZ <- term(),
-              wW45 <- term(),
-              oKi1CmarKYyX__3? <- term(),
-              v4TaAxcr_6fCJ! <- term(),
-              htR! <- term(),
-              u79kDK9sk? <- term(),
-              uwUWqKIRwFYXI! <- term(),
-              jROQmVEMbN_ <- term(),
-              tsYK3ZYr <- term(),
-              k_37pChYfnZ <- term(),
-              gu_uuIAyV7! <- term(),
-              var1 <- term(),
-              var2 <- term(),
-              var3 <- term(),
-              var4 <- term(),
-              var5 <- term(),
-              var6 <- term(),
-              var7 <- term(),
-              var8 <- term(),
-              var9 <- term(),
-              var10 <- term(),
-              var11 <- term(),
-              var12 <- term() do
+    check all(
+            nKo9DtVMD <- term(),
+            gW_H__Fb_RG_lZ <- term(),
+            wW45 <- term(),
+            oKi1CmarKYyX__3? <- term(),
+            v4TaAxcr_6fCJ! <- term(),
+            htR! <- term(),
+            u79kDK9sk? <- term(),
+            uwUWqKIRwFYXI! <- term(),
+            jROQmVEMbN_ <- term(),
+            tsYK3ZYr <- term(),
+            k_37pChYfnZ <- term(),
+            gu_uuIAyV7! <- term(),
+            var1 <- term(),
+            var2 <- term(),
+            var3 <- term(),
+            var4 <- term(),
+            var5 <- term(),
+            var6 <- term(),
+            var7 <- term(),
+            var8 <- term(),
+            var9 <- term(),
+            var10 <- term(),
+            var11 <- term(),
+            var12 <- term()
+          ) do
       # Keyword lists built with ~k[] have the value we expect:
       # -------------------------------------------------------
       assert ~k[nKo9DtVMD, gW_H__Fb_RG_lZ, wW45, oKi1CmarKYyX__3?, v4TaAxcr_6fCJ!, htR!, u79kDK9sk?, uwUWqKIRwFYXI!, jROQmVEMbN_, tsYK3ZYr, k_37pChYfnZ, gu_uuIAyV7!] ==

@@ -5,6 +5,7 @@ defmodule DarkKernel do
   alias DarkKernel.DarkFractions
   alias DarkKernel.DarkDatastructures.DarkKeywords
   alias DarkKernel.DarkDatastructures.DarkMaps
+  alias DarkKernel.DarkMutable
 
   defmodule DarkAssignmentError do
     defexception [:message]
@@ -90,7 +91,6 @@ defmodule DarkKernel do
     raise ArgumentError, "interpolation is not supported with the ~m sigil"
   end
 
-
   @doc ~S"""
   Expands an atom-keyed map with the given keys bound to variables with the same
   name.
@@ -130,5 +130,29 @@ defmodule DarkKernel do
 
   defmacro sigil_f({:<<>>, _, _}, _modifiers) do
     raise ArgumentError, "interpolation is not supported with the ~M sigil"
+  end
+
+  @doc """
+  Adds support for mutable variables inside the given code block.
+  Mutable variables must be specified upfront.
+
+  ## Examples
+
+      def factorial(n) do
+        # Define a mutable variable, which is only accessible inside the block
+        mutable! result: 1 do
+          for i <- 1..n do
+            # Update the variable in a way that's propagated "up" the AST scopes
+            # in the entire `mutable!` block.
+            result <<~ result * i
+          end
+
+          # Return the "mutable variable"
+          result
+        end
+      end
+  """
+  defmacro mutable!(variables, do: body) do
+    DarkMutable.do_mutable!(__CALLER__, variables, do: body)
   end
 end

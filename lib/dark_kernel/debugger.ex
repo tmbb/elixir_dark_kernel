@@ -30,14 +30,15 @@ defmodule DarkKernel.Debugger do
         |> Code.format_string!()
         |> to_string()
 
-      table = three_sided_cells([
-        {header_color("⤷ Code:"), bottom_line_style: :dashed},
-        code_color(text),
-        {header_color("⤷ Generated code:"), bottom_line_style: :dashed},
-        code_color(generated_code),
-        {header_color("⤷ Generated AST:"), bottom_line_style: :dashed},
-        code_color(inspect(ast, pretty: true))
-      ])
+      table =
+        three_sided_cells([
+          {header_color("⤷ Code:"), bottom_line_style: :dashed},
+          code_color(text),
+          {header_color("⤷ Generated code:"), bottom_line_style: :dashed},
+          code_color(generated_code),
+          {header_color("⤷ Generated AST:"), bottom_line_style: :dashed},
+          code_color(inspect(ast, pretty: true))
+        ])
 
       relative_filename = Path.relative_to_cwd(env.file)
       location = "#{relative_filename}:#{env.line}"
@@ -50,13 +51,11 @@ defmodule DarkKernel.Debugger do
     end
   end
 
-
   # ────────────────────────────────────────────────
   # Table formatting
   # ────────────────────────────────────────────────
 
   @default_table_width 100
-
 
   def color_with(text, color, previous_color \\ IO.ANSI.cyan()) do
     text
@@ -73,7 +72,6 @@ defmodule DarkKernel.Debugger do
   defp code_color(text) do
     color_with(text, IO.ANSI.blue())
   end
-
 
   defp three_sided_cell(content, options) do
     padding = Keyword.get(options, :padding, 1)
@@ -99,18 +97,17 @@ defmodule DarkKernel.Debugger do
         false -> "├"
       end
 
-
     as_table_cell_content =
       content
       |> String.split("\n")
       |> Enum.map(fn line -> ["│ ", h_padding, line, "\n"] end)
 
     [
-      (if top?, do: [nw_corner, hline(top_line_style, width), "\n"], else: []),
+      if(top?, do: [nw_corner, hline(top_line_style, width), "\n"], else: []),
       v_padding,
       as_table_cell_content,
       v_padding,
-      [sw_corner, hline(bottom_line_style, width), "\n"],
+      [sw_corner, hline(bottom_line_style, width), "\n"]
     ]
   end
 
@@ -118,9 +115,9 @@ defmodule DarkKernel.Debugger do
     maximum_width =
       cells_content
       |> Enum.flat_map(fn
-          {cell, _opts} -> String.split(cell, "\n")
-          cell -> String.split(cell, "\n")
-        end)
+        {cell, _opts} -> String.split(cell, "\n")
+        cell -> String.split(cell, "\n")
+      end)
       |> Enum.map(&String.length/1)
       |> Enum.max()
 

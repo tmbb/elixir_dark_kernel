@@ -7,7 +7,8 @@ defmodule DarkKernel.DarkDatastructures.DarkKeywords do
   @keyword_fetcher {Keyword, :fetch!}
 
   def do_sigil_k_assignment(text_ast, modifiers, rhs, env) do
-    {tilde_m_text, lhs} = KeyValues.extract_and_parse_tilde_text!("~m{}", text_ast, modifiers, env)
+    {tilde_m_text, lhs} =
+      KeyValues.extract_and_parse_tilde_text!("~m{}", text_ast, modifiers, env)
 
     # Don't convert anything!
     # We'll generate a valid Keyword list AST
@@ -30,7 +31,8 @@ defmodule DarkKernel.DarkDatastructures.DarkKeywords do
   end
 
   def do_sigil_k(text_ast, modifiers, env) do
-    {tilde_m_text, quoted} = KeyValues.extract_and_parse_tilde_text!("~k{}", text_ast, modifiers, env)
+    {tilde_m_text, quoted} =
+      KeyValues.extract_and_parse_tilde_text!("~k{}", text_ast, modifiers, env)
 
     normalized_list = KeyValues.normalize_list(quoted)
 

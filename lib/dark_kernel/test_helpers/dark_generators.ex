@@ -31,9 +31,7 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
 
     cond do
       max_length == 1 ->
-        string_as(
-          prefix: [chars: [?a..?z], size: 1]
-        )
+        string_as(prefix: [chars: [?a..?z], size: 1])
 
       min_length == 1 and max_length == 2 ->
         string_as(
@@ -50,7 +48,11 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
 
         string_as(
           prefix: [chars: [?a..?z], size: 1],
-          middle: [chars: middle_chars, min_length: middle_min_length, max_length: middle_max_length],
+          middle: [
+            chars: middle_chars,
+            min_length: middle_min_length,
+            max_length: middle_max_length
+          ],
           suffix: [chars: [??, ?!], size: 1, optional: true]
         )
     end
@@ -69,7 +71,12 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
     string_as(
       prefix: [chars: [?\s], min_length: 0, max_length: 6, optional: true],
       comma: [chars: [?,], size: 1],
-      suffix: [chars: List.duplicate(?\s, 5) ++ [?\n], min_length: 0, max_length: 6, optional: true]
+      suffix: [
+        chars: List.duplicate(?\s, 5) ++ [?\n],
+        min_length: 0,
+        max_length: 6,
+        optional: true
+      ]
     )
   end
 
@@ -81,7 +88,7 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
 
     outer_min_and_max_lengths =
       for {_name, data} <- parts do
-        case Keyword.get(data, :optional, :false) do
+        case Keyword.get(data, :optional, false) do
           true -> {0, 1}
           false -> {1, 1}
         end
@@ -115,19 +122,21 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
         fn {{{outer_min, outer_max}, {inner_min, inner_max}}, size} ->
           StreamData.list_of(
             StreamData.list_of(
-              StreamData.integer(0..(size-1)),
+              StreamData.integer(0..(size - 1)),
               min_length: inner_min,
               max_length: inner_max
             ),
             min_length: outer_min,
             max_length: outer_max
           )
-        end)
+        end
+      )
 
     StreamData.map(
       StreamData.fixed_list(list_of_generators),
       fn list_of_lists_of_indices ->
         args = Enum.zip(ranges, list_of_lists_of_indices)
+
         charlist =
           Enum.flat_map(args, fn
             {_range, []} ->
@@ -135,8 +144,7 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
 
             {ranges, [list_of_indices]} ->
               Enum.map(list_of_indices, fn index -> char_at(ranges, index) end)
-            end
-          )
+          end)
 
         to_string(charlist)
       end
@@ -194,11 +202,9 @@ defmodule DarkKernel.TestHelpers.DarkGenerators do
 
             remainder > size - 1 ->
               {:cont, remainder - size}
-
           end
 
         c when is_integer(c) ->
-
           cond do
             remainder == 0 ->
               {:halt, c}

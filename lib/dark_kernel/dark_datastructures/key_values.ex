@@ -2,6 +2,7 @@ defmodule DarkKernel.DarkDatastructures.KeyValues do
   @moduledoc false
 
   alias DarkKernel.Debugger
+
   alias DarkKernel.Exceptions.{
     InvalidKeywordError,
     UnexpectedBangError
@@ -24,16 +25,16 @@ defmodule DarkKernel.DarkDatastructures.KeyValues do
     generated_ast =
       quote do
         # Wrap it all in a block so that it counts as a single expression
-        (
-          # Assign the right hand side to a (constant) variable
-          # so that it doesn't get evaluated more than once
-          unquote(initialize_constant)
-          # Assing the variables defined by the left hand side
-          unquote_splicing(variable_assignments)
-          # Return the final datastructure
-          unquote(return_value)
-        )
+        # Assign the right hand side to a (constant) variable
+        # so that it doesn't get evaluated more than once
+        unquote(initialize_constant)
+        # Assing the variables defined by the left hand side
+        unquote_splicing(variable_assignments)
+        # Return the final datastructure
+        unquote(return_value)
       end
+
+    generated_ast
   end
 
   def normalize_list(quoted) do
@@ -58,7 +59,7 @@ defmodule DarkKernel.DarkDatastructures.KeyValues do
     generated_ast =
       for element <- normalized_list do
         case element do
-          {:bang, key} when is_atom(key)->
+          {:bang, key} when is_atom(key) ->
             raise UnexpectedBangError, key: key, text: tilde_text
 
           {:with_value, key, value_ast} when is_atom(key) ->
@@ -87,7 +88,7 @@ defmodule DarkKernel.DarkDatastructures.KeyValues do
     assignments =
       for element <- normalized_list do
         case element do
-          {:bang, key} when is_atom(key)->
+          {:bang, key} when is_atom(key) ->
             # No hygiene! we want to capture the user variable
             unhygienic_variable = Macro.var(key, nil)
             # Raise an error if the key doesn't exist
@@ -125,7 +126,6 @@ defmodule DarkKernel.DarkDatastructures.KeyValues do
         end
       end
 
-
     {initialize_constant, assignments}
   end
 
@@ -133,7 +133,7 @@ defmodule DarkKernel.DarkDatastructures.KeyValues do
     keyword_list =
       for element <- normalized_list do
         case element do
-          {:bang, key} when is_atom(key)->
+          {:bang, key} when is_atom(key) ->
             # No hygiene! we want to capture the user variable
             unhygienic_variable = Macro.var(key, nil)
             {key_converter.(key), unhygienic_variable}

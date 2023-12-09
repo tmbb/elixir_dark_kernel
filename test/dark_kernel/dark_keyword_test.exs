@@ -21,7 +21,6 @@ defmodule DarkKernel.DarkKeywordTest do
   end
 
   test "~k[] expressions allow key-value pairs" do
-
   end
 
   test "~k[] match expressions return only the matched keys and values" do
@@ -56,7 +55,7 @@ defmodule DarkKernel.DarkKeywordTest do
 
   test "~k[] match expression: bang (!) gives the same result - 1" do
     opts = [a: "A", b: "B", c: "C"]
-    assert (~k[a, b, c] <~ opts) ==  (~k[!a, !b, !c] <~ opts)
+    assert ~k[a, b, c] <~ opts == ~k[!a, !b, !c] <~ opts
   end
 
   test "~k[] match expression: bang (!) gives the same result - 2" do
